@@ -1,6 +1,6 @@
 
 public class LittleMensQuest {
 	public LittleMensQuest() {
-		System.out.println("gruen");
+		System.out.println("Bananen sind gruen");
 	}
 }
