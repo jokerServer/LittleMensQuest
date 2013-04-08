@@ -1,8 +1,8 @@
 public abstract class Entity {
-	private double xPosition; // in cm
-	private double yPosition; // in cm
-	private double xSpeed; // in cm/ms
-	private double ySpeed; // in cm/ms
+	private double xPosition; // in m
+	private double yPosition; // in m
+	private double xSpeed; // in m/s
+	private double ySpeed; // in m/s
 	private double weight; // in g
 
 	public double getxPosition() {
