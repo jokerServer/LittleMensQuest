@@ -72,7 +72,7 @@ public abstract class Entity {
 	protected void applyGravity(double timeElapsed) {
 		if (isFalling()) {
 			double fallTime = fallBegin - System.currentTimeMillis();
-			ySpeed = fallTime * 0.981;
+			ySpeed = fallTime * 9.81;
 		} else {
 			ySpeed = 0;
 		}
