@@ -3,6 +3,6 @@ public class LittleMensQuest {
 		new LittleMensQuest();
 	}
 	public LittleMensQuest() {
-		System.out.println("Bananen sind gruen, SO SCHLAMPE!"); // 123121231234
+		System.out.println("Bananen sind gruen, SO SCHLAMPE!");
 	}
 }

@@ -1,9 +1,22 @@
+import java.util.ArrayList;
+
 public abstract class Entity {
 	private double xPosition; // in m
 	private double yPosition; // in m
 	private double xSpeed; // in m/s
 	private double ySpeed; // in m/s
+	private static ArrayList<Entity> entitys;
 
+	public Entity(double xPosition, double yPosition) {
+		entitys.add(this);
+		setxPosition(xPosition);
+		setyPosition(yPosition);
+	}
+	
+	public static ArrayList<Entity> getEntitys(){
+		return entitys;
+	}
+	
 	public double getxPosition() {
 		return xPosition;
 	}
@@ -56,11 +69,6 @@ public abstract class Entity {
 			fallBegin = System.currentTimeMillis();
 		}
 		this.falling = falling;
-	}
-
-	public Entity(double xPosition, double yPosition) {
-		setxPosition(xPosition);
-		setyPosition(yPosition);
 	}
 
 	public void update(double timeElapsed) {
