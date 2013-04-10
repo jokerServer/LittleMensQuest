@@ -3,7 +3,6 @@ public abstract class Entity {
 	private double yPosition; // in m
 	private double xSpeed; // in m/s
 	private double ySpeed; // in m/s
-	// private double weight; // in g
 
 	public double getxPosition() {
 		return xPosition;
@@ -72,7 +71,7 @@ public abstract class Entity {
 	protected void applyGravity(double timeElapsed) {
 		if (isFalling()) {
 			double fallTime = fallBegin - System.currentTimeMillis();
-			ySpeed = fallTime * 9.81;
+			ySpeed = fallTime / 1000 * 9.81;
 		} else {
 			ySpeed = 0;
 		}
