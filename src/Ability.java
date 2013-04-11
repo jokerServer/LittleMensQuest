@@ -10,7 +10,7 @@ public abstract class Ability {
 	
 	public abstract boolean cast(Entity target);
 
-	public int getId() {
+	public int getId() { //TEST
 		return id;
 	}
 
