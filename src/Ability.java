@@ -3,7 +3,7 @@ public abstract class Ability {
 	private int id;
 	private String name;
 	
-	protected Ability(int id, String name) {
+	protected Ability(int id, String name) { //Test
 		setId(id);
 		setName(name);
 	}
