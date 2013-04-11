@@ -5,5 +5,9 @@ public class PlayerEntity extends Entity {
 		super(xPosition, yPosition);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void jump(){
+		
+	}
 
 }
