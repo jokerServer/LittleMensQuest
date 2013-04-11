@@ -5,7 +5,7 @@ public abstract class Entity {
 	private double yPosition; // in m
 	private double xSpeed; // in m/s
 	private double ySpeed; // in m/s
-	private static ArrayList<Entity> entitys;
+	private static ArrayList<Entity> entitys; // test
 
 	public Entity(double xPosition, double yPosition) {
 		entitys.add(this);
