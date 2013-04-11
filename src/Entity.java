@@ -3,14 +3,17 @@ import java.util.ArrayList;
 public abstract class Entity {
 	private double xPosition; // in m
 	private double yPosition; // in m
+	private double zPosition; // in m
 	private double xSpeed; // in m/s
 	private double ySpeed; // in m/s
+	private double zSpeed; // in m/s
 	private static ArrayList<Entity> entitys;
 
-	public Entity(double xPosition, double yPosition) {
+	public Entity(double xPosition, double yPosition, double zPosition) {
 		entitys.add(this);
 		setxPosition(xPosition);
 		setyPosition(yPosition);
+		setzPosition(zPosition);
 	}
 	
 	public static ArrayList<Entity> getEntitys(){
@@ -32,12 +35,20 @@ public abstract class Entity {
 	public void setyPosition(double yPosition) {
 		this.yPosition = yPosition;
 	}
+	
+	public double getzPosition() {
+		return zPosition;
+	}
+
+	public void setzPosition(double zPosition) {
+		this.zPosition = zPosition;
+	}
 
 	public double getxSpeed() {
 		return xSpeed;
 	}
 
-	public void setxSpeed(double xSpeed) {
+	private void setxSpeed(double xSpeed) {
 		this.xSpeed = xSpeed;
 	}
 
@@ -45,8 +56,16 @@ public abstract class Entity {
 		return ySpeed;
 	}
 
-	public void setySpeed(double ySpeed) {
+	private void setySpeed(double ySpeed) {
 		this.ySpeed = ySpeed;
+	}
+	
+	public double getzSpeed() {
+		return zSpeed;
+	}
+
+	private void setzSpeed(double zSpeed) {
+		this.zSpeed = zSpeed;
 	}
 
 	public double getFallBegin() {
@@ -93,5 +112,8 @@ public abstract class Entity {
 		setFalling(true);
 		setxSpeed(speed * Math.cos(angle));
 		setySpeed(speed * Math.sin(angle));
+		setzSpeed(speed * Math.tan(angle));
 	}
+	
+	public abstract boolean checkForCollision(Entity e);
 }
