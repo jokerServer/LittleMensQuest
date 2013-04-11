@@ -20,7 +20,7 @@ public abstract class Entity {
 		setzPosition(zPosition);
 	}
 
-	private void move(Direction direction, double distance) {
+	protected void move(Direction direction, double distance) {
 		switch (direction) {
 		case LEFT:
 			setxPosition(getxPosition() - distance);
