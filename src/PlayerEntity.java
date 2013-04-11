@@ -1,9 +1,14 @@
 
 public class PlayerEntity extends Entity {
+
 	private int health;
+	private boolean turningLeft;
+	private boolean turningRight;
+	private boolean sprinting;
+	private boolean jumping;
 	
-	public PlayerEntity(double xPosition, double yPosition) {
-		super(xPosition, yPosition);
+	public PlayerEntity(double xPosition, double yPosition, double zPosition) {
+		super(xPosition, yPosition, zPosition);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -16,5 +21,15 @@ public class PlayerEntity extends Entity {
 		// TODO Add collision detection
 		return false;
 	}
+
+	@Override
+	protected void updatePosition(double timeElapsed) {
+		if (turningLeft){
+			
+		} else if (turningRight){
+			
+		}
+	}
+	
 
 }

@@ -104,9 +104,7 @@ public abstract class Entity {
 		}
 	}
 
-	protected void updatePosition(double timeElapsed) {
-
-	}
+	protected abstract void updatePosition(double timeElapsed);
 
 	public void toss(double angle, double speed) {
 		setFalling(true);
