@@ -1,4 +1,3 @@
-
 public abstract class Ability {
 	private int id;
 	private String name;
