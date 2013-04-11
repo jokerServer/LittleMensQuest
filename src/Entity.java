@@ -9,17 +9,44 @@ public abstract class Entity {
 	private double zSpeed; // in m/s
 	private static ArrayList<Entity> entitys;
 
+	public enum Direction {
+		LEFT, RIGHT, FORWARD, BACK, UP, DOWN
+	}
+
 	public Entity(double xPosition, double yPosition, double zPosition) {
 		entitys.add(this);
 		setxPosition(xPosition);
 		setyPosition(yPosition);
 		setzPosition(zPosition);
 	}
-	
-	public static ArrayList<Entity> getEntitys(){
+
+	private void move(Direction direction, double distance) {
+		switch (direction) {
+		case LEFT:
+			setxPosition(getxPosition() - distance);
+			break;
+		case RIGHT:
+			setxPosition(getxPosition() + distance);
+			break;
+		case BACK:
+			setzPosition(getzPosition() + distance);
+			break;
+		case FORWARD:
+			setzPosition(getzPosition() - distance);
+			break;
+		case DOWN:
+			setyPosition(getyPosition() - distance);
+			break;
+		case UP:
+			setyPosition(getyPosition() + distance);
+			break;
+		}
+	}
+
+	public static ArrayList<Entity> getEntitys() {
 		return entitys;
 	}
-	
+
 	public double getxPosition() {
 		return xPosition;
 	}
@@ -35,7 +62,7 @@ public abstract class Entity {
 	public void setyPosition(double yPosition) {
 		this.yPosition = yPosition;
 	}
-	
+
 	public double getzPosition() {
 		return zPosition;
 	}
@@ -59,7 +86,7 @@ public abstract class Entity {
 	private void setySpeed(double ySpeed) {
 		this.ySpeed = ySpeed;
 	}
-	
+
 	public double getzSpeed() {
 		return zSpeed;
 	}
@@ -112,6 +139,6 @@ public abstract class Entity {
 		setySpeed(speed * Math.sin(angle));
 		setzSpeed(speed * Math.tan(angle));
 	}
-	
+
 	public abstract boolean checkForCollision(Entity e);
 }

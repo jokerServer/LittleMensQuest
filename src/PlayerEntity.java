@@ -6,7 +6,8 @@ public class PlayerEntity extends Entity {
 	private boolean turningRight;
 	private boolean sprinting;
 	private boolean jumping;
-	
+
+
 	public PlayerEntity(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
 		// TODO Auto-generated constructor stub
