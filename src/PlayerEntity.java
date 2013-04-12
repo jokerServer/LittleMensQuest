@@ -30,15 +30,15 @@ public class PlayerEntity extends Entity {
 
 	@Override
 	protected void updatePosition(double timeElapsed) {
-		if (state.contains(State.RUNNING_LEFT)) {
-			move(Direction.LEFT, 0.1 * timeElapsed);
-		} else if (state.contains(State.RUNNING_RIGHT)) {
-			move(Direction.RIGHT, 0.1 * timeElapsed);
-		} else if (state.contains(State.SPRINTING_LEFT)) {
-			move(Direction.LEFT, 0.3 * timeElapsed);
-		} else if (state.contains(State.SPRINTING_RIGHT)) {
-			move(Direction.RIGHT, 0.3 * timeElapsed);
-		}
+//		if (state.contains(State.RUNNING_LEFT)) {
+//			move(Direction.LEFT, 0.1 * timeElapsed);
+//		} else if (state.contains(State.RUNNING_RIGHT)) {
+//			move(Direction.RIGHT, 0.1 * timeElapsed);
+//		} else if (state.contains(State.SPRINTING_LEFT)) {
+//			move(Direction.LEFT, 0.3 * timeElapsed);
+//		} else if (state.contains(State.SPRINTING_RIGHT)) {
+//			move(Direction.RIGHT, 0.3 * timeElapsed);
+//		}
 	}
 
 }

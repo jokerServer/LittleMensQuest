@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public abstract class Entity {
@@ -18,6 +20,11 @@ public abstract class Entity {
 		setxPosition(xPosition);
 		setyPosition(yPosition);
 		setzPosition(zPosition);
+	}
+	
+	public void drawYourself(Graphics g){ //TODO In Render class
+		g.setColor(Color.RED);
+		g.fillRect((int) getxPosition(), (int) getyPosition(), 40, 40);
 	}
 
 	protected void move(Direction direction, double distance) {
