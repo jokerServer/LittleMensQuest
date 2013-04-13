@@ -1,9 +1,11 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class LittleMensQuest {
+public class LittleMensQuest implements KeyListener {
 	public static final int ticksPerSecond = 60;
-	private Renderer renderer = new Renderer();
-	private PlayerEntity player = new PlayerEntity(100, 100, 100);
+	private Renderer renderer = new Renderer(this);
+	private PlayerEntity ownPlayer = new PlayerEntity(100, 100, 100);
 
 	public static void main(String args[]) {
 		new LittleMensQuest();
@@ -18,7 +20,8 @@ public class LittleMensQuest {
 			lastUpdate = System.currentTimeMillis();
 			renderer.repaint();
 			try {
-				Thread.sleep(Math.max(1 / ticksPerSecond * 1000 - (loopBegin - System.currentTimeMillis()), 0));
+				Thread.sleep(Math.max(1 / ticksPerSecond * 1000
+						- (loopBegin - System.currentTimeMillis()), 0));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -27,8 +30,30 @@ public class LittleMensQuest {
 
 	private void update(long timeElapsed) {
 		ArrayList<Entity> entitys = Entity.getEntitys();
-		for (int i = 0; i < entitys.size(); i++){
+		for (int i = 0; i < entitys.size(); i++) {
 			entitys.get(i).update(timeElapsed);
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent k) {
+		switch (k.getKeyCode()) {
+		case KeyEvent.VK_LEFT:
+			ownPlayer.setxDirection(PlayerEntity.Direction.BACKWARDS);
+			break;
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent k) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent k) {
+		// TODO Auto-generated method stub
+
 	}
 }

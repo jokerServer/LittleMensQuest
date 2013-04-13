@@ -23,7 +23,7 @@ public class PlayerEntity extends Entity {
 
 	private int vitality;
 	private int intelligence;
-	private double runningSpeed;
+	private double runningSpeed = 100;
 	private double attackSpeed;
 	private double jumpPower;
 	private boolean running;

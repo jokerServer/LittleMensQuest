@@ -1,9 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
@@ -16,7 +16,8 @@ public class Renderer extends Canvas {
 	private static final long serialVersionUID = 1L;
 	BufferStrategy bf;
 	
-	public Renderer(){
+	public Renderer(KeyListener listener){
+		addKeyListener(listener);
 		setBackground(Color.WHITE);
 		setForeground(Color.BLACK);
 		JFrame gui = new JFrame("Little Mens Quest");
