@@ -13,8 +13,12 @@ public class Throwable extends Entity{
 	}
 	@Override
 	protected void updateSpeed() {
-		setySpeed(tossStrength - 0.00981
-				* (System.currentTimeMillis() - tossStart));
+		if (getyPosition()>0) {
+			setySpeed(tossStrength - 0.00981 * (System.currentTimeMillis() - tossStart));
+		} else if (getyPosition()<=0) {
+			setyPosition(0);
+			// TODO Abstand zum Boden beachten
+		}
 	}
 	@Override
 	public boolean checkForCollision(Entity e) {
