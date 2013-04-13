@@ -24,7 +24,7 @@ public class PlayerEntity extends Entity {
 
 	private int vitality;
 	private int intelligence;
-	private double runningSpeed = 4/3.6;
+	private double runningSpeed = 4 / 3.6;
 	private double attackSpeed;
 	private double jumpPower = 4;
 	private boolean running;
@@ -61,6 +61,7 @@ public class PlayerEntity extends Entity {
 			crouching = false;
 			jumping = true;
 			jumpStart = System.currentTimeMillis();
+			System.out.println("TEST");
 		}
 	}
 
@@ -102,8 +103,13 @@ public class PlayerEntity extends Entity {
 			setzSpeed(0);
 		}
 		if (jumping) {
-			setySpeed(jumpPower - 0.00981
-					* (System.currentTimeMillis() - jumpStart));
+			if (getyPosition() == 0 && getySpeed() < 0) {
+				setySpeed(0);
+				jumping = false;
+			} else {
+				setySpeed(jumpPower - 0.00981
+						* (System.currentTimeMillis() - jumpStart));
+			}
 		}
 	}
 
@@ -115,7 +121,9 @@ public class PlayerEntity extends Entity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		g.drawImage(img, (int) (getxPosition() * 100) + 50, observer.getSize().height - (int) (getyPosition() * 100 + 100), observer);
+		g.drawImage(img, (int) (getxPosition() * 100) + 50,
+				observer.getSize().height - (int) (getyPosition() * 100 + 100),
+				observer);
 	}
 
 }
