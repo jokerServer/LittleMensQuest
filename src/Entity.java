@@ -11,10 +11,6 @@ public abstract class Entity {
 	private double zSpeed; // in m/s
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
 
-	public enum Direction {
-		LEFT, RIGHT, FORWARD, BACK, UP, DOWN
-	}
-
 	public Entity(double xPosition, double yPosition, double zPosition) {
 		entitys.add(this);
 		setxPosition(xPosition);
@@ -27,28 +23,9 @@ public abstract class Entity {
 		g.fillRect((int) getxPosition(), (int) getyPosition(), 40, 40);
 	}
 
-	protected void move(Direction direction, double distance) {
-		switch (direction) {
-		case LEFT:
-			setxPosition(getxPosition() - distance);
-			break;
-		case RIGHT:
-			setxPosition(getxPosition() + distance);
-			break;
-		case BACK:
-			setzPosition(getzPosition() + distance);
-			break;
-		case FORWARD:
-			setzPosition(getzPosition() - distance);
-			break;
-		case DOWN:
-			setyPosition(getyPosition() - distance);
-			break;
-		case UP:
-			setyPosition(getyPosition() + distance);
-			break;
-		}
-	}
+//	protected void move(Direction direction, double distance) {
+//
+//	}
 
 	public static ArrayList<Entity> getEntitys() {
 		return entitys;
@@ -82,7 +59,7 @@ public abstract class Entity {
 		return xSpeed;
 	}
 
-	private void setxSpeed(double xSpeed) {
+	protected void setxSpeed(double xSpeed) {
 		this.xSpeed = xSpeed;
 	}
 
@@ -90,7 +67,7 @@ public abstract class Entity {
 		return ySpeed;
 	}
 
-	private void setySpeed(double ySpeed) {
+	protected void setySpeed(double ySpeed) {
 		this.ySpeed = ySpeed;
 	}
 
@@ -98,7 +75,7 @@ public abstract class Entity {
 		return zSpeed;
 	}
 
-	private void setzSpeed(double zSpeed) {
+	protected void setzSpeed(double zSpeed) {
 		this.zSpeed = zSpeed;
 	}
 
@@ -125,20 +102,17 @@ public abstract class Entity {
 	}
 
 	public void update(double timeElapsed) {
-		applyGravity(timeElapsed);
+		updateSpeed();
 		updatePosition(timeElapsed);
 	}
 
-	protected void applyGravity(double timeElapsed) {
-		if (isFalling()) {
-			double fallTime = fallBegin - System.currentTimeMillis();
-			ySpeed = fallTime / 1000 * 9.81;
-		} else {
-			ySpeed = 0;
-		}
+	protected void updatePosition(double timeElapsed){
+		setxPosition(getxPosition() + getxSpeed() * timeElapsed / 1000);
+		setyPosition(getyPosition() + getySpeed() * timeElapsed / 1000);
+		setzPosition(getzPosition() + getzSpeed() * timeElapsed / 1000);
 	}
-
-	protected abstract void updatePosition(double timeElapsed);
+	
+	protected abstract void updateSpeed();
 
 	public void toss(double angle, double speed) {
 		setFalling(true);
