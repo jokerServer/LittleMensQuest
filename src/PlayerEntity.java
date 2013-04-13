@@ -24,9 +24,9 @@ public class PlayerEntity extends Entity {
 
 	private int vitality;
 	private int intelligence;
-	private double runningSpeed = 100;
+	private double runningSpeed = 4/3.6;
 	private double attackSpeed;
-	private double jumpPower = 100;
+	private double jumpPower = 4;
 	private boolean running;
 	private boolean sprinting;
 	private boolean crouching;
@@ -115,7 +115,7 @@ public class PlayerEntity extends Entity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		g.drawImage(img, (int) getxPosition(), (int) getyPosition(), observer);
+		g.drawImage(img, (int) (getxPosition() * 100), observer.getSize().height - (int) (getyPosition() * 100), observer);
 	}
 
 }
