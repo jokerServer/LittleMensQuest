@@ -1,14 +1,148 @@
 public class Equipment {
+	// gerbter shit, dat Java Vererbung QQ
+	
 	private int stat_Dmg;
 	private int stat_MagicDmg;
-	private int stat_Armor;
-	private int stat_MagicResistance;
-	private int stat_LP;
-	private int stat_MP;
-	private int stat_Lifereg;
-	private int stat_Manareg;
-	private int stat_vitality; 	// Life
-	private int stat_strenght;	// Melee Dmg +	// Melee Physical Skills Dmg+
-	private int stat_magic;		// MagicDmg +	// Magical Skill Dmg+
-	private int stat_agility;	// Attackspeed+ // Ranged Physical Skills Dmg+
+	private int stat_atkSpeed;
+	
+	private int stat_weaponType; // zB (!!!) 0 = keine Waffe ; 1 = Einhänder ; 2 = Zweihänder ; 3 = Dolch ; 4 = Zauberstab
+	private int stat_armorType; // zB (!!!) 0 = keine Rüstung ; 1 = Helm ; 2 = Brustpanzer ; 3 = Beinschutz ; 4 = Schuhe ; 5 = Schultern ; 6 = anderes(??) // etc
+	
+	private int emt_Dmg; 		// emt = EnchantMenT //
+	private int emt_MagicDmg;
+	private int emt_atkSpeed;
+	private int emt_Armor;
+	private int emt_MagicResistance;
+	private int emt_LP;
+	private int emt_MP;
+	private int emt_Lifereg;
+	private int emt_Manareg;
+	private int emt_vitality; 	// Life
+	private int emt_strenght;	// Melee Dmg +	// Melee Physical Skills Dmg+
+	private int emt_magic;		// MagicDmg +	// Magical Skill Dmg+
+	private int emt_agility;	// Attackspeed+ // Ranged/Assassins Physical Skills Dmg+
+	
+	// TODO loadStats(itemID)
+	// TODO customize setter
+	
+	// TODO recalcStats() (PlayerEntity?)
+	// TODO Player Tabelle 
+	// TODO Inventory Tabelle
+	
+	// setters
+	
+	protected void setStat_Dmg(int stat_Dmg) {
+		this.stat_Dmg = stat_Dmg;
+	}
+	protected void setStat_MagicDmg(int stat_MagicDmg) {
+		this.stat_MagicDmg = stat_MagicDmg;
+	}
+	protected void setStat_atkSpeed(int stat_atkSpeed) {
+		this.stat_atkSpeed = stat_atkSpeed;
+	}
+	protected void setStat_weaponType(int stat_weaponType) {
+		this.stat_weaponType = stat_weaponType;
+	}
+	protected void setStat_armorType(int stat_armorType) {
+		this.stat_armorType = stat_armorType;
+	}
+	protected void setEmt_Dmg(int emt_Dmg) {
+		this.emt_Dmg = emt_Dmg;
+	}
+	protected void setEmt_MagicDmg(int emt_MagicDmg) {
+		this.emt_MagicDmg = emt_MagicDmg;
+	}
+	protected void setEmt_atkSpeed(int emt_atkSpeed) {
+		this.emt_atkSpeed = emt_atkSpeed;
+	}
+	protected void setEmt_Armor(int emt_Armor) {
+		this.emt_Armor = emt_Armor;
+	}
+	protected void setEmt_MagicResistance(int emt_MagicResistance) {
+		this.emt_MagicResistance = emt_MagicResistance;
+	}
+	protected void setEmt_LP(int emt_LP) {
+		this.emt_LP = emt_LP;
+	}
+	protected void setEmt_MP(int emt_MP) {
+		this.emt_MP = emt_MP;
+	}
+	protected void setEmt_Lifereg(int emt_Lifereg) {
+		this.emt_Lifereg = emt_Lifereg;
+	}
+	protected void setEmt_Manareg(int emt_Manareg) {
+		this.emt_Manareg = emt_Manareg;
+	}
+	protected void setEmt_vitality(int emt_vitality) {
+		this.emt_vitality = emt_vitality;
+	}
+	protected void setEmt_strenght(int emt_strenght) {
+		this.emt_strenght = emt_strenght;
+	}
+	protected void setEmt_magic(int emt_magic) {
+		this.emt_magic = emt_magic;
+	}
+	protected void setEmt_agility(int emt_agility) {
+		this.emt_agility = emt_agility;
+	}
+	
+	// Getters
+	
+	public int getStat_Dmg() {
+		return stat_Dmg;
+	}
+	public int getStat_MagicDmg() {
+		return stat_MagicDmg;
+	}
+	public int getStat_atkSpeed() {
+		return stat_atkSpeed;
+	}
+	public int getStat_weaponType() {
+		return stat_weaponType;
+	}
+	public int getStat_armorType() {
+		return stat_armorType;
+	}
+	public int getEmt_Dmg() {
+		return emt_Dmg;
+	}
+	public int getEmt_MagicDmg() {
+		return emt_MagicDmg;
+	}
+	public int getEmt_atkSpeed() {
+		return emt_atkSpeed;
+	}
+	public int getEmt_Armor() {
+		return emt_Armor;
+	}
+	public int getEmt_MagicResistance() {
+		return emt_MagicResistance;
+	}
+	public int getEmt_LP() {
+		return emt_LP;
+	}
+	public int getEmt_MP() {
+		return emt_MP;
+	}
+	public int getEmt_Lifereg() {
+		return emt_Lifereg;
+	}
+	public int getEmt_Manareg() {
+		return emt_Manareg;
+	}
+	public int getEmt_vitality() {
+		return emt_vitality;
+	}
+	public int getEmt_strenght() {
+		return emt_strenght;
+	}
+	public int getEmt_magic() {
+		return emt_magic;
+	}
+	public int getEmt_agility() {
+		return emt_agility;
+	}
+	
+	
+	
 }
