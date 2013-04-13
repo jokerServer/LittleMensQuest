@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,7 +18,7 @@ public class PlayerEntity extends Entity {
 	public double getRunningSpeed() {
 		return runningSpeed;
 	}
-	
+
 	public double getSprintingSpeed() {
 		return runningSpeed + 3;
 	}
@@ -37,6 +38,7 @@ public class PlayerEntity extends Entity {
 	private boolean jumping;
 	private long jumpStart;
 	private Direction xDirection;
+	public Image playerSprite;
 
 	public Direction getxDirection() {
 		return xDirection;
@@ -58,6 +60,11 @@ public class PlayerEntity extends Entity {
 
 	public PlayerEntity(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
+		try {
+			playerSprite = ImageIO.read(new File("res/Player.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void jump() {
@@ -65,7 +72,6 @@ public class PlayerEntity extends Entity {
 			crouching = false;
 			jumping = true;
 			jumpStart = System.currentTimeMillis();
-			System.out.println("TEST");
 		}
 	}
 
@@ -125,15 +131,17 @@ public class PlayerEntity extends Entity {
 
 	@Override
 	public void drawYourself(Graphics g, Component observer) {
-		Image img = null;
-		try {
-			img = ImageIO.read(new File("res/Player.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		g.drawImage(img, (int) (getxPosition() * 100) + 50,
-				observer.getSize().height - (int) (getyPosition() * 100 + 100),
-				observer);
+		g.setColor(Color.BLACK);
+		int xPosition = (int) (getxPosition() * 100) + 50
+				+ (int) (getzPosition() * 10);
+		int yPosition = (int) (getyPosition() * 100) + 100
+				+ (int) (getzPosition() * 40);
+		yPosition = observer.getSize().height - yPosition;
+		g.drawImage(playerSprite, xPosition, yPosition, observer);
+		g.setColor(Color.BLUE);
+		g.drawString("x: " + getxPosition(), xPosition, yPosition);
+		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
+		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
 	}
 
 }
