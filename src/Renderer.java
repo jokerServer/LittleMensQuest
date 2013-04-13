@@ -26,7 +26,6 @@ public class Renderer extends Canvas {
 		gui.setLayout(new BorderLayout());
 		gui.add(this, BorderLayout.CENTER);
 		gui.setVisible(true);
-		gui.createBufferStrategy(2);
 		createBufferStrategy(2);
 		bf = getBufferStrategy();
 	}

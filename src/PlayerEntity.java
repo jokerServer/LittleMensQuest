@@ -115,7 +115,7 @@ public class PlayerEntity extends Entity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		g.drawImage(img, (int) (getxPosition() * 100), observer.getSize().height - (int) (getyPosition() * 100), observer);
+		g.drawImage(img, (int) (getxPosition() * 100) + 50, observer.getSize().height - (int) (getyPosition() * 100 + 100), observer);
 	}
 
 }

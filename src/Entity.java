@@ -109,7 +109,7 @@ public abstract class Entity {
 
 	protected void updatePosition(double timeElapsed){
 		setxPosition(getxPosition() + getxSpeed() * timeElapsed / 1000);
-		setyPosition(getyPosition() + getySpeed() * timeElapsed / 1000);
+		setyPosition(Math.max(getyPosition() + getySpeed() * timeElapsed / 1000, 0));
 		setzPosition(getzPosition() + getzSpeed() * timeElapsed / 1000);
 	}
 	
