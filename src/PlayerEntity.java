@@ -17,6 +17,10 @@ public class PlayerEntity extends Entity {
 	public double getRunningSpeed() {
 		return runningSpeed;
 	}
+	
+	public double getSprintingSpeed() {
+		return runningSpeed + 3;
+	}
 
 	public void setRunningSpeed(double runningSpeed) {
 		this.runningSpeed = runningSpeed;
@@ -24,11 +28,11 @@ public class PlayerEntity extends Entity {
 
 	private int vitality;
 	private int intelligence;
-	private double runningSpeed = 4 / 3.6;
+	private double runningSpeed = 10 / 3.6;
 	private double attackSpeed;
 	private double jumpPower = 4;
-	private boolean running;
-	private boolean sprinting;
+	private boolean running = true;
+	private boolean sprinting = false;
 	private boolean crouching;
 	private boolean jumping;
 	private long jumpStart;
@@ -88,17 +92,23 @@ public class PlayerEntity extends Entity {
 
 	@Override
 	protected void updateSpeed() {
+		double speed = 0;
+		if (sprinting) {
+			speed = getSprintingSpeed();
+		} else if (running) {
+			speed = getRunningSpeed();
+		}
 		if (getxDirection() == Direction.FORWARDS) {
-			setxSpeed(getRunningSpeed());
+			setxSpeed(speed);
 		} else if (getxDirection() == Direction.BACKWARDS) {
-			setxSpeed(-getRunningSpeed());
+			setxSpeed(-speed);
 		} else {
 			setxSpeed(0);
 		}
 		if (getzDirection() == Direction.FORWARDS) {
-			setzSpeed(getRunningSpeed());
+			setzSpeed(speed);
 		} else if (getzDirection() == Direction.BACKWARDS) {
-			setzSpeed(-getRunningSpeed());
+			setzSpeed(-speed);
 		} else {
 			setzSpeed(0);
 		}
