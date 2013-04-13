@@ -41,19 +41,42 @@ public class LittleMensQuest implements KeyListener {
 		case KeyEvent.VK_LEFT:
 			ownPlayer.setxDirection(PlayerEntity.Direction.BACKWARDS);
 			break;
+		case KeyEvent.VK_RIGHT:
+			ownPlayer.setxDirection(PlayerEntity.Direction.FORWARDS);
+			break;
+		case KeyEvent.VK_UP:
+			ownPlayer.setzDirection(PlayerEntity.Direction.FORWARDS);
+			break;
+		case KeyEvent.VK_DOWN:
+			ownPlayer.setzDirection(PlayerEntity.Direction.BACKWARDS);
+			break;
+		case KeyEvent.VK_SPACE:
+			ownPlayer.jump();
+			break;
 		}
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent k) {
-		// TODO Auto-generated method stub
+		switch (k.getKeyCode()) {
+		case KeyEvent.VK_LEFT:
+			ownPlayer.setxDirection(PlayerEntity.Direction.STRAIGHT);
+			break;
+		case KeyEvent.VK_RIGHT:
+			ownPlayer.setxDirection(PlayerEntity.Direction.STRAIGHT);
+			break;
+		case KeyEvent.VK_UP:
+			ownPlayer.setzDirection(PlayerEntity.Direction.STRAIGHT);
+			break;
+		case KeyEvent.VK_DOWN:
+			ownPlayer.setzDirection(PlayerEntity.Direction.STRAIGHT);
+			break;
+		}
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent k) {
-		// TODO Auto-generated method stub
-
 	}
 }

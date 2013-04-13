@@ -13,6 +13,7 @@ public class PlayerEntity extends Entity {
 
 	private int agility;
 	private int strength;
+
 	public double getRunningSpeed() {
 		return runningSpeed;
 	}
@@ -25,7 +26,7 @@ public class PlayerEntity extends Entity {
 	private int intelligence;
 	private double runningSpeed = 100;
 	private double attackSpeed;
-	private double jumpPower;
+	private double jumpPower = 100;
 	private boolean running;
 	private boolean sprinting;
 	private boolean crouching;
@@ -53,13 +54,14 @@ public class PlayerEntity extends Entity {
 
 	public PlayerEntity(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void jump() {
-		crouching = false;
-		jumping = true;
-		jumpStart = System.currentTimeMillis();
+		if (!jumping) {
+			crouching = false;
+			jumping = true;
+			jumpStart = System.currentTimeMillis();
+		}
 	}
 
 	public void sprint() {
@@ -99,11 +101,12 @@ public class PlayerEntity extends Entity {
 		} else {
 			setzSpeed(0);
 		}
-		if (jumping){
-			setySpeed(jumpPower - 0.00981 * (System.currentTimeMillis() - jumpStart));
+		if (jumping) {
+			setySpeed(jumpPower - 0.00981
+					* (System.currentTimeMillis() - jumpStart));
 		}
 	}
-	
+
 	@Override
 	public void drawYourself(Graphics g, Component observer) {
 		Image img = null;
