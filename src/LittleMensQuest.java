@@ -38,17 +38,20 @@ public class LittleMensQuest implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent k) {
 		switch (k.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A:
 			ownPlayer.setxDirection(PlayerEntity.Direction.BACKWARDS);
 			break;
-		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D:
 			ownPlayer.setxDirection(PlayerEntity.Direction.FORWARDS);
 			break;
-		case KeyEvent.VK_UP:
+		case KeyEvent.VK_W:
 			ownPlayer.setzDirection(PlayerEntity.Direction.FORWARDS);
 			break;
-		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
 			ownPlayer.setzDirection(PlayerEntity.Direction.BACKWARDS);
+			break;
+		case KeyEvent.VK_SHIFT:
+			ownPlayer.sprint();
 			break;
 		case KeyEvent.VK_SPACE:
 			ownPlayer.jump();
@@ -60,17 +63,20 @@ public class LittleMensQuest implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent k) {
 		switch (k.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A:
 			ownPlayer.setxDirection(PlayerEntity.Direction.STRAIGHT);
 			break;
-		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D:
 			ownPlayer.setxDirection(PlayerEntity.Direction.STRAIGHT);
 			break;
-		case KeyEvent.VK_UP:
+		case KeyEvent.VK_W:
 			ownPlayer.setzDirection(PlayerEntity.Direction.STRAIGHT);
 			break;
-		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
 			ownPlayer.setzDirection(PlayerEntity.Direction.STRAIGHT);
+			break;
+		case KeyEvent.VK_SHIFT:
+			ownPlayer.run();
 			break;
 		}
 
