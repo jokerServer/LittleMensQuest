@@ -6,6 +6,7 @@ public class Throwable extends Entity{
 	private double throwStartSpeed;
 	private long tossStart;
 	private double tossStrength;
+	private boolean throwing;
 	
 	public Throwable(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
@@ -13,11 +14,15 @@ public class Throwable extends Entity{
 	}
 	@Override
 	protected void updateSpeed() {
-		if (getyPosition()>0) {
-			setySpeed(tossStrength - 0.00981 * (System.currentTimeMillis() - tossStart));
-		} else if (getyPosition()<=0) {
-			setyPosition(0);
-			// TODO Abstand zum Boden beachten
+		if (throwing) {
+			if (getyPosition()>0) {
+				setySpeed(tossStrength - 0.00981 * (System.currentTimeMillis() - tossStart));
+			} else if (getyPosition()<=0) {
+				setyPosition(0);
+				setySpeed(0);
+				throwing=false;
+				// TODO Abstand zum Boden beachten
+			}
 		}
 	}
 	@Override
@@ -28,12 +33,13 @@ public class Throwable extends Entity{
 	
 	public void toss(int direction, int tossStrength) {
 		this.tossStrength = tossStrength;
+		throwing = true;
+		tossStart = System.currentTimeMillis();
 		if (direction==1) { // Links
-			tossStart = System.currentTimeMillis();
 			setxSpeed(tossStrength*(-1));
 		} else if (direction==2)  { // Rechts
-			tossStart = System.currentTimeMillis();
 			setxSpeed(tossStrength);
 		}
+		setySpeed(tossStrength);
 	}
 }
