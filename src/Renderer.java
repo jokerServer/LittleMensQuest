@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
@@ -32,7 +33,7 @@ public class Renderer extends Canvas {
 	public void render(Graphics g) {
 		ArrayList<Entity> entitys = Entity.getEntitys();
 		for (int i = 0; i < entitys.size(); i++) {
-			entitys.get(i).drawYourself(g);
+			entitys.get(i).drawYourself(g, this);
 		}
 	}
 

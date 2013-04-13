@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public abstract class Entity {
 		setzPosition(zPosition);
 	}
 	
-	public void drawYourself(Graphics g){ //TODO In Render class
+	public void drawYourself(Graphics g, Component observer){ //TODO In Render class
 		g.setColor(Color.RED);
 		g.fillRect((int) getxPosition(), (int) getyPosition(), 40, 40);
 	}

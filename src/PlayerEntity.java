@@ -1,4 +1,10 @@
-import java.util.ArrayList;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class PlayerEntity extends Entity {
 	public enum Direction {
@@ -96,6 +102,17 @@ public class PlayerEntity extends Entity {
 		if (jumping){
 			setySpeed(jumpPower - 0.00981 * (System.currentTimeMillis() - jumpStart));
 		}
+	}
+	
+	@Override
+	public void drawYourself(Graphics g, Component observer) {
+		Image img = null;
+		try {
+			img = ImageIO.read(new File("res/Player.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		g.drawImage(img, (int) getxPosition(), (int) getyPosition(), observer);
 	}
 
 }
