@@ -12,6 +12,7 @@ public class Throwable extends Entity{
 		super(xPosition, yPosition, zPosition);
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	protected void updateSpeed() {
 		if (throwing) {
@@ -25,6 +26,7 @@ public class Throwable extends Entity{
 			}
 		}
 	}
+	
 	@Override
 	public boolean checkForCollision(Entity e) {
 		// TODO Auto-generated method stub
