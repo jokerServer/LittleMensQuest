@@ -78,7 +78,7 @@ public class PlayerEntity extends Entity {
 	}
 
 	@Override
-	protected void updatePosition(double timeElapsed) {
+	protected void updateSpeed() {
 		if (getxDirection() == Direction.FORWARDS) {
 			setxSpeed(getRunningSpeed());
 		} else if (getxDirection() == Direction.BACKWARDS) {
