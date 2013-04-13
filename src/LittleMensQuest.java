@@ -6,6 +6,7 @@ public class LittleMensQuest implements KeyListener {
 	public static final int ticksPerSecond = 60;
 	private Renderer renderer = new Renderer(this);
 	private PlayerEntity ownPlayer = new PlayerEntity(1.5, 1.5, 1.5);
+	private Ball datBahll = new Ball(3, 0, 3);
 
 	public static void main(String args[]) {
 		new LittleMensQuest();
