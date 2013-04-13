@@ -57,7 +57,7 @@ public abstract class Equipment {
 		this.emt_MagicDmg = emt_MagicDmg;
 	}
 	protected void setEmt_atkSpeed(int emt_atkSpeed) {
-		this.emt_atkSpeed = emt_atkSpeed;
+		this.emt_atkSpeedBonus = emt_atkSpeed;
 	}
 	protected void setEmt_Armor(int emt_Armor) {
 		this.emt_Armor = emt_Armor;
@@ -101,11 +101,8 @@ public abstract class Equipment {
 	public double getStat_atkSpeed() {
 		return stat_atkSpeed;
 	}
-	public int getStat_weaponType() {
-		return stat_weaponType;
-	}
-	public int getStat_armorType() {
-		return stat_armorType;
+	public int getStat_Type() {
+		return stat_Type;
 	}
 	public int getEmt_Dmg() {
 		return emt_Dmg;
@@ -114,7 +111,7 @@ public abstract class Equipment {
 		return emt_MagicDmg;
 	}
 	public int getEmt_atkSpeed() {
-		return emt_atkSpeed;
+		return emt_atkSpeedBonus;
 	}
 	public int getEmt_Armor() {
 		return emt_Armor;
@@ -128,10 +125,10 @@ public abstract class Equipment {
 	public int getEmt_MP() {
 		return emt_MP;
 	}
-	public int getEmt_Lifereg() {
+	public double getEmt_Lifereg() {
 		return emt_Lifereg;
 	}
-	public int getEmt_Manareg() {
+	public double getEmt_Manareg() {
 		return emt_Manareg;
 	}
 	public int getEmt_vitality() {
@@ -173,5 +170,5 @@ public abstract class Equipment {
 	}
 	protected void setItemRenderPicture(Image itemRenderPicture) {
 		this.itemRenderPicture = itemRenderPicture;
-	
+	}
 }
