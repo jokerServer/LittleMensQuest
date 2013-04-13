@@ -1,22 +1,29 @@
-public class Equipment {
-	// gerbter shit, dat Java Vererbung QQ
+import java.awt.Image;
+
+public abstract class Equipment {
+	private int itemID;
+	private String itemName;
+	private Image itemIcon; 
+	private Image itemRenderPicture;
 	
 	private int stat_Dmg;
 	private int stat_MagicDmg;
-	private int stat_atkSpeed;
+	private double stat_atkSpeed;
 	
-	private int stat_weaponType; // zB (!!!) 0 = keine Waffe ; 1 = Einhänder ; 2 = Zweihänder ; 3 = Dolch ; 4 = Zauberstab
-	private int stat_armorType; // zB (!!!) 0 = keine Rüstung ; 1 = Helm ; 2 = Brustpanzer ; 3 = Beinschutz ; 4 = Schuhe ; 5 = Schultern ; 6 = anderes(??) // etc
+	private int stat_Armor;
+	private int stat_MagicResistance;
+	
+	private int stat_Type; // zB (!!!) 0 = Blau ; 1 = Einhänder ; 2 = Zweihänder ; 3 = Dolch ; 4 = Zauberstab; 
 	
 	private int emt_Dmg; 		// emt = EnchantMenT //
 	private int emt_MagicDmg;
-	private int emt_atkSpeed;
+	private int emt_atkSpeedBonus;
 	private int emt_Armor;
 	private int emt_MagicResistance;
 	private int emt_LP;
 	private int emt_MP;
-	private int emt_Lifereg;
-	private int emt_Manareg;
+	private double emt_Lifereg;
+	private double emt_Manareg;
 	private int emt_vitality; 	// Life
 	private int emt_strenght;	// Melee Dmg +	// Melee Physical Skills Dmg+
 	private int emt_magic;		// MagicDmg +	// Magical Skill Dmg+
@@ -37,14 +44,11 @@ public class Equipment {
 	protected void setStat_MagicDmg(int stat_MagicDmg) {
 		this.stat_MagicDmg = stat_MagicDmg;
 	}
-	protected void setStat_atkSpeed(int stat_atkSpeed) {
+	protected void setStat_atkSpeed(double stat_atkSpeed) {
 		this.stat_atkSpeed = stat_atkSpeed;
 	}
-	protected void setStat_weaponType(int stat_weaponType) {
-		this.stat_weaponType = stat_weaponType;
-	}
-	protected void setStat_armorType(int stat_armorType) {
-		this.stat_armorType = stat_armorType;
+	protected void setStat_Type(int stat_weaponType) {
+		this.stat_Type = stat_weaponType;
 	}
 	protected void setEmt_Dmg(int emt_Dmg) {
 		this.emt_Dmg = emt_Dmg;
@@ -53,7 +57,7 @@ public class Equipment {
 		this.emt_MagicDmg = emt_MagicDmg;
 	}
 	protected void setEmt_atkSpeed(int emt_atkSpeed) {
-		this.emt_atkSpeed = emt_atkSpeed;
+		this.emt_atkSpeedBonus = emt_atkSpeed;
 	}
 	protected void setEmt_Armor(int emt_Armor) {
 		this.emt_Armor = emt_Armor;
@@ -94,14 +98,11 @@ public class Equipment {
 	public int getStat_MagicDmg() {
 		return stat_MagicDmg;
 	}
-	public int getStat_atkSpeed() {
+	public double getStat_atkSpeed() {
 		return stat_atkSpeed;
 	}
-	public int getStat_weaponType() {
-		return stat_weaponType;
-	}
-	public int getStat_armorType() {
-		return stat_armorType;
+	public int getStat_Type() {
+		return stat_Type;
 	}
 	public int getEmt_Dmg() {
 		return emt_Dmg;
@@ -110,7 +111,7 @@ public class Equipment {
 		return emt_MagicDmg;
 	}
 	public int getEmt_atkSpeed() {
-		return emt_atkSpeed;
+		return emt_atkSpeedBonus;
 	}
 	public int getEmt_Armor() {
 		return emt_Armor;
@@ -124,10 +125,10 @@ public class Equipment {
 	public int getEmt_MP() {
 		return emt_MP;
 	}
-	public int getEmt_Lifereg() {
+	public double getEmt_Lifereg() {
 		return emt_Lifereg;
 	}
-	public int getEmt_Manareg() {
+	public double getEmt_Manareg() {
 		return emt_Manareg;
 	}
 	public int getEmt_vitality() {
@@ -143,6 +144,31 @@ public class Equipment {
 		return emt_agility;
 	}
 	
+	// geklauter scheiß von item
 	
+	public int getItemID() {
+		return itemID;
+	}
 	
+	protected void setItemID(int itemID) {
+		this.itemID = itemID;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	protected void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public Image getItemIcon() {
+		return itemIcon;
+	}
+	protected void setItemIcon(Image itemIcon) {
+		this.itemIcon = itemIcon;
+	}
+	public Image getItemRenderPicture() {
+		return itemRenderPicture;
+	}
+	protected void setItemRenderPicture(Image itemRenderPicture) {
+		this.itemRenderPicture = itemRenderPicture;
+	}
 }
