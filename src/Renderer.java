@@ -18,7 +18,7 @@ public class Renderer extends Canvas {
 	
 	public Renderer(KeyListener listener){
 		addKeyListener(listener);
-		setBackground(Color.WHITE);
+		setBackground(Color.RED);
 		setForeground(Color.BLACK);
 		JFrame gui = new JFrame("Little Mens Quest");
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
