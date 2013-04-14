@@ -21,7 +21,7 @@ public class Ball extends Throwable {
 	
 	public void drawYourself(Graphics g, Component observer) {
 		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) + 12
+		int xPosition = (int) (getxPosition() * 100) - 12
 				+ (int) (getzPosition() * 10);
 		int yPosition = (int) (getyPosition() * 100) + 12
 				+ (int) (getzPosition() * 40);

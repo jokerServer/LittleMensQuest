@@ -6,4 +6,6 @@ public abstract class Hitbox {
 	}
 	
 	public abstract boolean intersects(Hitbox hb);
+	
+	public abstract int getShape();
 }

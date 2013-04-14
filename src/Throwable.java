@@ -52,14 +52,7 @@ public class Throwable extends Entity{
 	}
 
 	@Override
-	public boolean checkForCollision(Rectangle rect, double zPosition) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean checkForCollision(double xPosition, double yPosition,
-			double zPosition, double radius) {
+	public boolean checkForCollision(Hitbox h) {
 		// TODO Auto-generated method stub
 		return false;
 	}

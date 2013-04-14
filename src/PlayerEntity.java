@@ -13,6 +13,8 @@ public class PlayerEntity extends Entity {
 		FORWARDS, STRAIGHT, BACKWARDS
 	}
 
+	private Hitbox head;
+	private Hitbox body;
 	private int agility;
 	private int strength;
 	private int vitality;
@@ -28,7 +30,7 @@ public class PlayerEntity extends Entity {
 	private double jumpPower = 4;
 	private long jumpStart;
 	public Image playerSprite;
-	private Equipment head;
+	private Equipment helmet;
 	private Equipment chest;
 	private Equipment legs;
 	private Equipment boots;
@@ -82,26 +84,26 @@ public class PlayerEntity extends Entity {
 
 	@Override
 	public boolean checkForCollision(Entity e) {
-//		Rectangle head = new RectangleHitbox(getyPosition()-1, getxPosition()-0.5, 50, 50);
-//		Rectangle body = new RectangleHitbox(10, 10, 100, 150);
-//		if (e.checkForCollision(head, getzPosition())
-//				|| e.checkForCollision(body, getzPosition())) {
-//			return true;
-//		}
+		if (e.checkForCollision(head) || e.checkForCollision(body)) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean checkForCollision(Rectangle rect, double zPosition) {
-		// TODO Auto-generated method stub
+	public boolean checkForCollision(Hitbox h) {
+		updateHitboxes();
+		if (head.intersects(h) || body.intersects(h)) {
+			return true;
+		}
 		return false;
 	}
 
-	@Override
-	public boolean checkForCollision(double xPosition, double yPosition,
-			double zPosition, double radius) {
-		// TODO Auto-generated method stub
-		return false;
+	private void updateHitboxes() {
+		head = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 1,
+				getzPosition(), 0.3, 0.4, 1);
+		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 0.6,
+				getzPosition(), 1, 1.6, 1);
 	}
 
 	@Override
@@ -140,10 +142,11 @@ public class PlayerEntity extends Entity {
 	@Override
 	public void drawYourself(Graphics g, Component observer) {
 		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) + 50
+		int xPosition = (int) (getxPosition() * 100) - 50
 				+ (int) (getzPosition() * 10);
 		int yPosition = (int) (getyPosition() * 100) + 100
-				+ (int) (getzPosition() * 40);
+				+ (int) (getzPosition() * 40) + playerSprite.getWidth(observer)
+				/ 2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(playerSprite, xPosition, yPosition, observer);
 		g.setColor(Color.BLUE);
@@ -261,11 +264,11 @@ public class PlayerEntity extends Entity {
 	}
 
 	public Equipment getHead() {
-		return head;
+		return helmet;
 	}
 
 	public void setHead(Equipment head) {
-		this.head = head;
+		this.helmet = head;
 	}
 
 	public Equipment getLegs() {

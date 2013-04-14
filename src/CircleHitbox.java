@@ -1,14 +1,27 @@
 
 public class CircleHitbox extends Hitbox {
-
-	public CircleHitbox() {
-		// TODO Auto-generated constructor stub
+	private double x;
+	private double y;
+	private double z;
+	private double radius;
+	private double depth;
+	
+	public CircleHitbox(double x, double y, double z, double radius, double depth) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.radius = radius;
+		this.depth = depth;
 	}
 
 	@Override
 	public boolean intersects(Hitbox hb) {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int getShape() {
+		return 1; //Cirlce
 	}
 
 }

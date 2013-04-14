@@ -121,7 +121,5 @@ public abstract class Entity {
 
 	public abstract boolean checkForCollision(Entity e);
 	
-	public abstract boolean checkForCollision(Rectangle rect, double zPosition);
-	
-	public abstract boolean checkForCollision(double xPosition, double yPosition, double zPosition, double radius);
+	public abstract boolean checkForCollision(Hitbox h);
 }
