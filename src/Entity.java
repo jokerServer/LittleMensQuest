@@ -9,7 +9,7 @@ public abstract class Entity {
 	private double yPosition; // in m
 	private double zPosition; // in m
 	private double xSpeed; // in m/s
-	private double ySpeed; // in m/s
+	private double ySpeed; //in m/s
 	private double zSpeed; // in m/s
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
 
