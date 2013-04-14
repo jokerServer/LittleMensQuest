@@ -50,7 +50,7 @@ public class Throwable extends Entity{
 			setxSpeed(tossStrength);
 		}
 		setyPosition(0.0001);
-		setySpeed(tossStrength*10);
+		setySpeed(tossStrength);
 	}
 
 	@Override
