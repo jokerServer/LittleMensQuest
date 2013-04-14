@@ -139,9 +139,9 @@ public class PlayerEntity extends Entity {
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(playerSprite, xPosition, yPosition, observer);
 		g.setColor(Color.BLUE);
-		g.drawString("x: " + getxPosition(), xPosition, yPosition);
-		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
-		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
+		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
+		g.drawString("y: " + getyPosition(), xPosition, yPosition);
+		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
 	}
 
 }
