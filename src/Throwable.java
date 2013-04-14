@@ -1,8 +1,14 @@
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Throwable extends Entity{
-	private double fancyWeight;
-	private Image fancyIcon;
+	private double weight;
+	private Image image;
 	private double throwStartSpeed;
 	private long tossStart;
 	private double tossStrength;
