@@ -25,7 +25,7 @@ public class Ball extends Throwable {
 		int xPosition = (int) (getxPosition() * 100) - 12
 				+ (int) (getzPosition() * 10);
 		int yPosition = (int) (getyPosition() * 100) + 12
-				+ (int) (getzPosition() * 40);
+				+ (int) (getzPosition() * 40) + ballSprite.getWidth(null)/2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(ballSprite, xPosition, yPosition, observer);
 		g.setColor(Color.BLUE);
