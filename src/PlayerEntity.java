@@ -24,7 +24,7 @@ public class PlayerEntity extends Entity {
 	}
 
 	public void setRunningSpeed(double runningSpeed) {
-		this.runningSpeed = runningSpeed;
+		this.runningSpeed = runningSpeed; // 
 	}
 
 	private int vitality;
