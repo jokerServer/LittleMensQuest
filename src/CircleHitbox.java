@@ -1,21 +1,19 @@
 
 public class CircleHitbox extends Hitbox {
-	private double x;
-	private double y;
-	private double z;
 	private double radius;
-	private double depth;
 	
 	public CircleHitbox(double x, double y, double z, double radius, double depth) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		super(x, y, z, depth);
 		this.radius = radius;
-		this.depth = depth;
 	}
 
 	@Override
 	public boolean intersects(Hitbox hb) {
+		if (hb.getShape() == 0) {
+			return Hitbox.intersects(this, (RectangleHitbox) hb);
+		} else if (hb.getShape() == 1) {
+			return Hitbox.intersects((CircleHitbox) hb, this);
+		}
 		return false;
 	}
 
@@ -24,4 +22,11 @@ public class CircleHitbox extends Hitbox {
 		return 1; //Cirlce
 	}
 
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
 }

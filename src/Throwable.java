@@ -14,10 +14,11 @@ public class Throwable extends Entity{
 	private long tossStart;
 	private double tossStrength;
 	private boolean throwing;
+	private CircleHitbox hitbox;
 	
 	public Throwable(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
-		// TODO Auto-generated constructor stub
+		hitbox = new CircleHitbox(getxPosition(), getyPosition(), getzPosition(), 0.25, 0.5);
 	}
 	
 	@Override
@@ -36,8 +37,7 @@ public class Throwable extends Entity{
 	
 	@Override
 	public boolean checkForCollision(Entity e) {
-		// TODO Auto-generated method stub
-		return false;
+		return e.checkForCollision(hitbox);
 	}
 	
 	public void toss(int direction, int tossStrength) {
@@ -54,7 +54,12 @@ public class Throwable extends Entity{
 
 	@Override
 	public boolean checkForCollision(Hitbox h) {
-		// TODO Auto-generated method stub
-		return false;
+		return hitbox.intersects(h);
+	}
+
+	@Override
+	protected void updateHitboxes() {
+		//TODO move
+		hitbox = new CircleHitbox(getxPosition(), getyPosition(), getzPosition(), 0.25, 0.5);		
 	}
 }

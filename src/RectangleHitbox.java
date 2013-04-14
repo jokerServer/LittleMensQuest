@@ -1,30 +1,42 @@
-
 public class RectangleHitbox extends Hitbox {
-	private double x;
-	private double y;
-	private double z;
 	private double width;
 	private double height;
-	private double depth;
 
-	public RectangleHitbox(double x, double y, double z, double width, double height, double depth) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.width = width;
-		this.height = height;
-		this.depth = depth;
+	public RectangleHitbox(double x, double y, double z, double width,
+			double height, double depth) {
+		super(x, y, z, depth);
+		setWidth(width);
+		setHeight(height);
 	}
 
 	@Override
 	public boolean intersects(Hitbox hb) {
-		// TODO Auto-generated method stub
+		if (hb.getShape() == 0) {
+			return Hitbox.intersects(this, (RectangleHitbox) hb);
+		} else if (hb.getShape() == 1) {
+			return Hitbox.intersects((CircleHitbox) hb, this);
+		}
 		return false;
 	}
 
 	@Override
 	public int getShape() {
-		return 0; //Rectangle
+		return 0; // Rectangle
 	}
 
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
 }

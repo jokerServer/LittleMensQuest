@@ -39,9 +39,13 @@ public class PlayerEntity extends Entity {
 
 	public PlayerEntity(double xPosition, double yPosition, double zPosition,
 			int agility, int strength, int vitality, int intelligence,
-			Equipment head, Equipment chest, Equipment legs, Equipment boots,
+			Equipment helmet, Equipment chest, Equipment legs, Equipment boots,
 			Equipment necklace, Equipment ring) {
 		super(xPosition, yPosition, zPosition);
+		head = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 1,
+				getzPosition(), 0.3, 0.4, 1);
+		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 0.6,
+				getzPosition(), 1, 1.6, 1);
 		try {
 			playerSprite = ImageIO.read(new File("res/Player.png"));
 		} catch (IOException e) {
@@ -52,7 +56,7 @@ public class PlayerEntity extends Entity {
 		setVitality(vitality);
 		setIntelligence(intelligence);
 		setChest(chest);
-		setHead(head);
+		setHead(helmet);
 		setLegs(legs);
 		setBoots(boots);
 		setNecklace(necklace);
@@ -85,6 +89,7 @@ public class PlayerEntity extends Entity {
 	@Override
 	public boolean checkForCollision(Entity e) {
 		if (e.checkForCollision(head) || e.checkForCollision(body)) {
+			System.out.println("Collision");
 			return true;
 		}
 		return false;
@@ -92,14 +97,14 @@ public class PlayerEntity extends Entity {
 
 	@Override
 	public boolean checkForCollision(Hitbox h) {
-		updateHitboxes();
 		if (head.intersects(h) || body.intersects(h)) {
 			return true;
 		}
 		return false;
 	}
 
-	private void updateHitboxes() {
+	@Override
+	protected void updateHitboxes() {
 		head = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 1,
 				getzPosition(), 0.3, 0.4, 1);
 		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 0.6,
