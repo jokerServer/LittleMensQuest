@@ -49,7 +49,8 @@ public class Throwable extends Entity{
 		} else if (direction==2)  { // Rechts
 			setxSpeed(tossStrength);
 		}
-		setySpeed(tossStrength);
+		setyPosition(0.0001);
+		setySpeed(tossStrength*10);
 	}
 
 	@Override

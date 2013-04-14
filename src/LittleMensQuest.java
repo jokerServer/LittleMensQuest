@@ -7,7 +7,7 @@ public class LittleMensQuest implements KeyListener {
 	private Renderer renderer = new Renderer(this);
 	private PlayerEntity ownPlayer = new PlayerEntity(1.5, 0, 1.5, 99, 99, 99,
 			99, null, null, null, null, null, null);
-	private Ball datBahll = new Ball(3, 0, 3);
+	private Ball datBall = new Ball(3, 0, 3);
 
 	public static void main(String args[]) {
 		new LittleMensQuest();
