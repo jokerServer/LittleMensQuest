@@ -1,8 +1,8 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public abstract class Entity {
 	private double xPosition; // in m

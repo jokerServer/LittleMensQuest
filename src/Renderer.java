@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import javax.swing.JFrame;
 
@@ -32,6 +34,7 @@ public class Renderer extends Canvas {
 
 	public void render(Graphics g) {
 		ArrayList<Entity> entitys = Entity.getEntitys();
+		 Collections.sort(entitys, new DepthComperator());
 		for (int i = 0; i < entitys.size(); i++) {
 			entitys.get(i).drawYourself(g, this);
 		}
