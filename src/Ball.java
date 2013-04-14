@@ -16,7 +16,7 @@ public class Ball extends Throwable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		toss(2, 2);
+		toss(2, 3);
 	}
 	
 	public void drawYourself(Graphics g, Component observer) {
