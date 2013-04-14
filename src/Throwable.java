@@ -1,6 +1,7 @@
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 
@@ -49,5 +50,18 @@ public class Throwable extends Entity{
 			setxSpeed(tossStrength);
 		}
 		setySpeed(tossStrength);
+	}
+
+	@Override
+	public boolean checkForCollision(Rectangle rect, double zPosition) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkForCollision(double xPosition, double yPosition,
+			double zPosition, double radius) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

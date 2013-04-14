@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public abstract class Entity {
@@ -23,10 +24,6 @@ public abstract class Entity {
 		g.setColor(Color.RED);
 		g.fillRect((int) getxPosition(), (int) getyPosition(), 40, 40);
 	}
-
-//	protected void move(Direction direction, double distance) {
-//
-//	}
 
 	public static ArrayList<Entity> getEntitys() {
 		return entitys;
@@ -123,4 +120,8 @@ public abstract class Entity {
 	}
 
 	public abstract boolean checkForCollision(Entity e);
+	
+	public abstract boolean checkForCollision(Rectangle rect, double zPosition);
+	
+	public abstract boolean checkForCollision(double xPosition, double yPosition, double zPosition, double radius);
 }

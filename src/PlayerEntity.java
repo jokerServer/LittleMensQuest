@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,6 +15,142 @@ public class PlayerEntity extends Entity {
 
 	private int agility;
 	private int strength;
+	private int vitality;
+	private int intelligence;
+	private double runningSpeed = 10 / 3.6;
+	private double attackSpeed;
+	private Direction xDirection;
+	private Direction zDirection;
+	private boolean running = true;
+	private boolean sprinting = false;
+	private boolean crouching;
+	private boolean jumping;
+	private double jumpPower = 4;
+	private long jumpStart;
+	public Image playerSprite;
+	private Equipment head;
+	private Equipment chest;
+	private Equipment legs;
+	private Equipment boots;
+	private Equipment necklace;
+	private Equipment ring;
+
+	public PlayerEntity(double xPosition, double yPosition, double zPosition,
+			int agility, int strength, int vitality, int intelligence,
+			Equipment head, Equipment chest, Equipment legs, Equipment boots,
+			Equipment necklace, Equipment ring) {
+		super(xPosition, yPosition, zPosition);
+		try {
+			playerSprite = ImageIO.read(new File("res/Player.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		setAgility(agility);
+		setStrength(strength);
+		setVitality(vitality);
+		setIntelligence(intelligence);
+		setChest(chest);
+		setHead(head);
+		setLegs(legs);
+		setBoots(boots);
+		setNecklace(necklace);
+		setRing(ring);
+	}
+
+	public boolean pickUp() {
+		// TODO Pick up
+		return false;
+	}
+
+	public void jump() {
+		if (!jumping) {
+			crouching = false;
+			jumping = true;
+			jumpStart = System.currentTimeMillis();
+		}
+	}
+
+	public void sprint() {
+		running = false;
+		sprinting = true;
+	}
+
+	public void run() {
+		sprinting = false;
+		running = true;
+	}
+
+	@Override
+	public boolean checkForCollision(Entity e) {
+		Rectangle head = new Rectangle(10, 10, 10, 10);
+		Rectangle body = new Rectangle(10, 10, 10, 10);
+		if (e.checkForCollision(head, getzPosition())
+				|| e.checkForCollision(body, getzPosition())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkForCollision(Rectangle rect, double zPosition) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkForCollision(double xPosition, double yPosition,
+			double zPosition, double radius) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void updateSpeed() {
+		double speed = 0;
+		if (sprinting) {
+			speed = getSprintingSpeed();
+		} else if (running) {
+			speed = getRunningSpeed();
+		}
+		if (getxDirection() == Direction.FORWARDS) {
+			setxSpeed(speed);
+		} else if (getxDirection() == Direction.BACKWARDS) {
+			setxSpeed(-speed);
+		} else {
+			setxSpeed(0);
+		}
+		if (getzDirection() == Direction.FORWARDS) {
+			setzSpeed(speed);
+		} else if (getzDirection() == Direction.BACKWARDS) {
+			setzSpeed(-speed);
+		} else {
+			setzSpeed(0);
+		}
+		if (jumping) {
+			if (getyPosition() == 0 && getySpeed() < 0) {
+				setySpeed(0);
+				jumping = false;
+			} else {
+				setySpeed(jumpPower - 0.00981
+						* (System.currentTimeMillis() - jumpStart));
+			}
+		}
+	}
+
+	@Override
+	public void drawYourself(Graphics g, Component observer) {
+		g.setColor(Color.BLACK);
+		int xPosition = (int) (getxPosition() * 100) + 50
+				+ (int) (getzPosition() * 10);
+		int yPosition = (int) (getyPosition() * 100) + 100
+				+ (int) (getzPosition() * 40);
+		yPosition = observer.getSize().height - yPosition;
+		g.drawImage(playerSprite, xPosition, yPosition, observer);
+		g.setColor(Color.BLUE);
+		g.drawString("x: " + getxPosition(), xPosition, yPosition);
+		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
+		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
+	}
 
 	public double getRunningSpeed() {
 		return runningSpeed;
@@ -24,28 +161,9 @@ public class PlayerEntity extends Entity {
 	}
 
 	public void setRunningSpeed(double runningSpeed) {
-		this.runningSpeed = runningSpeed; // 
+		this.runningSpeed = runningSpeed;
 	}
 
-	private int vitality;
-	private int intelligence;
-	private double runningSpeed = 10 / 3.6;
-	private double attackSpeed;
-	private double jumpPower = 5;
-	private boolean running = true;
-	private boolean sprinting = false;
-	private boolean crouching;
-	private boolean jumping;
-	private long jumpStart;
-	private Direction xDirection;
-	public Image playerSprite;
-	private Equipment chest;
-	private Equipment head;
-	private Equipment legs;
-	private Equipment boots;
-	private Equipment necklace;
-	private Equipment ring;
-	
 	public int getAgility() {
 		return agility;
 	}
@@ -182,21 +300,6 @@ public class PlayerEntity extends Entity {
 		this.ring = ring;
 	}
 
-	public PlayerEntity(double xPosition, double yPosition, double zPosition, Equipment head, Equipment chest, Equipment legs, Equipment boots, Equipment necklace, Equipment ring) {
-		super(xPosition, yPosition, zPosition);
-		try {
-			playerSprite = ImageIO.read(new File("res/Player.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		setChest(chest);
-		setHead(head);
-		setLegs(legs);
-		setBoots(boots);
-		setNecklace(necklace);
-		setRing(ring);
-	}
-
 	public Direction getxDirection() {
 		return xDirection;
 	}
@@ -212,89 +315,4 @@ public class PlayerEntity extends Entity {
 	public void setzDirection(Direction zDirection) {
 		this.zDirection = zDirection;
 	}
-	
-	public boolean pickUp(){
-		//TODO Pick up
-		return false;
-	}
-
-	private Direction zDirection;
-
-	public void jump() {
-		if (!jumping) {
-			crouching = false;
-			jumping = true;
-			jumpStart = System.currentTimeMillis();
-		}
-	}
-
-	public void sprint() {
-		running = false;
-		sprinting = true;
-	}
-
-	public void run() {
-		sprinting = false;
-		running = true;
-	}
-
-	public void stop() {
-		sprinting = false;
-		running = false;
-	}
-
-	@Override
-	public boolean checkForCollision(Entity e) {
-		// TODO Add collision detection
-		return false;
-	}
-
-	@Override
-	protected void updateSpeed() {
-		double speed = 0;
-		if (sprinting) {
-			speed = getSprintingSpeed();
-		} else if (running) {
-			speed = getRunningSpeed();
-		}
-		if (getxDirection() == Direction.FORWARDS) {
-			setxSpeed(speed);
-		} else if (getxDirection() == Direction.BACKWARDS) {
-			setxSpeed(-speed);
-		} else {
-			setxSpeed(0);
-		}
-		if (getzDirection() == Direction.FORWARDS) {
-			setzSpeed(speed);
-		} else if (getzDirection() == Direction.BACKWARDS) {
-			setzSpeed(-speed);
-		} else {
-			setzSpeed(0);
-		}
-		if (jumping) {
-			if (getyPosition() == 0 && getySpeed() < 0) {
-				setySpeed(0);
-				jumping = false;
-			} else {
-				setySpeed(jumpPower - 0.00981
-						* (System.currentTimeMillis() - jumpStart));
-			}
-		}
-	}
-
-	@Override
-	public void drawYourself(Graphics g, Component observer) {
-		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) + 50
-				+ (int) (getzPosition() * 10);
-		int yPosition = (int) (getyPosition() * 100) + 100
-				+ (int) (getzPosition() * 40);
-		yPosition = observer.getSize().height - yPosition;
-		g.drawImage(playerSprite, xPosition, yPosition, observer);
-		g.setColor(Color.BLUE);
-		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
-		g.drawString("y: " + getyPosition(), xPosition, yPosition);
-		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
-	}
-
 }
