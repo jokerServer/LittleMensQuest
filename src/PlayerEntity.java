@@ -82,12 +82,12 @@ public class PlayerEntity extends Entity {
 
 	@Override
 	public boolean checkForCollision(Entity e) {
-		Rectangle head = new Rectangle(10, 10, 50, 50);
-		Rectangle body = new Rectangle(10, 10, 100, 150);
-		if (e.checkForCollision(head, getzPosition())
-				|| e.checkForCollision(body, getzPosition())) {
-			return true;
-		}
+//		Rectangle head = new RectangleHitbox(getyPosition()-1, getxPosition()-0.5, 50, 50);
+//		Rectangle body = new RectangleHitbox(10, 10, 100, 150);
+//		if (e.checkForCollision(head, getzPosition())
+//				|| e.checkForCollision(body, getzPosition())) {
+//			return true;
+//		}
 		return false;
 	}
 

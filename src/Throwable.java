@@ -25,8 +25,7 @@ public class Throwable extends Entity{
 		if (throwing) {
 			if (getyPosition()>0) {
 				setySpeed(tossStrength - 0.00981 * (System.currentTimeMillis() - tossStart));
-			} else if (getyPosition()<=0) {
-				setyPosition(0);
+			} else if (getyPosition()<=0 && getySpeed() <= 0) {
 				setySpeed(0);
 				throwing=false;
 				// TODO Abstand zum Boden beachten
@@ -49,8 +48,7 @@ public class Throwable extends Entity{
 		} else if (direction==2)  { // Rechts
 			setxSpeed(tossStrength);
 		}
-		setyPosition(0.0001);
-		setySpeed(tossStrength*10);
+		setySpeed(tossStrength);
 	}
 
 	@Override
