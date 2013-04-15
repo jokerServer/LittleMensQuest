@@ -16,9 +16,17 @@ public class Throwable extends Entity{
 	private boolean throwing;
 	private CircleHitbox hitbox;
 	
+	public CircleHitbox getHitbox() {
+		return hitbox;
+	}
+
+	public void setHitbox(CircleHitbox hitbox) {
+		this.hitbox = hitbox;
+	}
+
 	public Throwable(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
-		hitbox = new CircleHitbox(getxPosition(), getyPosition(), getzPosition(), 0.25, 0.5);
+		hitbox = new CircleHitbox(getxPosition() -17.5, getyPosition() -17.5, getzPosition(), 0.175, 0.5);
 	}
 	
 	@Override
@@ -60,6 +68,6 @@ public class Throwable extends Entity{
 	@Override
 	protected void updateHitboxes() {
 		//TODO move
-		hitbox = new CircleHitbox(getxPosition(), getyPosition(), getzPosition(), 0.25, 0.5);		
+		hitbox = new CircleHitbox(getxPosition(), getyPosition(), getzPosition(), 0.175, 0.5);		
 	}
 }

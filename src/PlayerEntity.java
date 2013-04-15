@@ -42,7 +42,7 @@ public class PlayerEntity extends Entity {
 			Equipment helmet, Equipment chest, Equipment legs, Equipment boots,
 			Equipment necklace, Equipment ring) {
 		super(xPosition, yPosition, zPosition);
-		head = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 1,
+		head = new RectangleHitbox(getxPosition() - 0.15, getyPosition() + 5,
 				getzPosition(), 0.3, 0.4, 1);
 		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 0.6,
 				getzPosition(), 1, 1.6, 1);
@@ -105,9 +105,9 @@ public class PlayerEntity extends Entity {
 
 	@Override
 	protected void updateHitboxes() {
-		head = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 1,
-				getzPosition(), 0.3, 0.4, 1);
-		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 0.6,
+		head = new RectangleHitbox(getxPosition() - 0.3, getyPosition() + 1,
+				getzPosition(), 0.6, 0.4, 1);
+		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() + 0.6,
 				getzPosition(), 1, 1.6, 1);
 	}
 
@@ -147,13 +147,14 @@ public class PlayerEntity extends Entity {
 	@Override
 	public void drawYourself(Graphics g, Component observer) {
 		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) - 50
-				+ (int) (getzPosition() * 10);
-		int yPosition = (int) (getyPosition() * 100) + 100
-				+ (int) (getzPosition() * 40) + playerSprite.getWidth(observer)
-				/ 2;
+		int xPosition = (int) (getxPosition() * 100) - 50;
+		int yPosition = (int) (getyPosition() * 100)
+				+ (int) (getzPosition() * 40)
+				+ playerSprite.getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(playerSprite, xPosition, yPosition, observer);
+		body.show(g, observer);
+		head.show(g, observer);
 		g.setColor(Color.BLUE);
 		g.drawString("x: " + getxPosition(), xPosition, yPosition);
 		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);

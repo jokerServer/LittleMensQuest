@@ -1,3 +1,6 @@
+import java.awt.Component;
+import java.awt.Graphics;
+
 public abstract class Hitbox {
 	private double x;
 	private double y;
@@ -12,6 +15,8 @@ public abstract class Hitbox {
 	}
 
 	public abstract int getShape();
+	
+	public abstract void show(Graphics g, Component observer);
 
 	public abstract boolean intersects(Hitbox hb);
 

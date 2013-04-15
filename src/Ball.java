@@ -24,13 +24,14 @@ public class Ball extends Throwable {
 		g.setColor(Color.BLACK);
 		int xPosition = (int) (getxPosition() * 100) - 12
 				+ (int) (getzPosition() * 10);
-		int yPosition = (int) (getyPosition() * 100) + 12
-				+ (int) (getzPosition() * 40) + ballSprite.getWidth(null)/2;
+		int yPosition = (int) (getyPosition() * 100) 
+				+ (int) (getzPosition() * 40) - ballSprite.getHeight(observer)/2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(ballSprite, xPosition, yPosition, observer);
 		g.setColor(Color.BLUE);
 		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
 		g.drawString("y: " + getyPosition(), xPosition, yPosition);
 		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
+		getHitbox().show(g, observer);
 	}
 }

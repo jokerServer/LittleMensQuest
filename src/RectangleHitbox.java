@@ -1,3 +1,7 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+
 public class RectangleHitbox extends Hitbox {
 	private double width;
 	private double height;
@@ -38,5 +42,13 @@ public class RectangleHitbox extends Hitbox {
 
 	public void setHeight(double height) {
 		this.height = height;
+	}
+
+	@Override
+	public void show(Graphics g, Component observer) {
+		Color before = g.getColor();
+		g.setColor(Color.GREEN);
+		g.drawRect((int) (getX() * 100), observer.getSize().height - ((int) (getY() * 100) + (int) (getZ() * 40)), (int)(getWidth()*100), (int)(getHeight()*100));
+		g.setColor(before);		
 	}
 }
