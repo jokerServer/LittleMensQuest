@@ -38,7 +38,7 @@ public class CircleHitbox extends Hitbox {
 	public void show(Graphics g, Component observer) {
 		Color before = g.getColor();
 		g.setColor(Color.GREEN);
-		g.fillOval((int) (getX() * 100), observer.getSize().height - (int) (getY() * 100 + getZ() * 40), (int)(getRadius()*200), (int)(getRadius()*200));
+		g.drawOval((int) (getX() * 100), observer.getSize().height - (int) (getY() * 100 + getZ() * 40), (int)(getRadius()*200), (int)(getRadius()*200));
 		g.setColor(before);
 	}
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class LittleMensQuest implements KeyListener {
 	public static final int ticksPerSecond = 60;
 	private Renderer renderer = new Renderer(this);
-	private PlayerEntity ownPlayer = new PlayerEntity(1.5, 3, 0, 99, 99, 99,
+	private PlayerEntity ownPlayer = new PlayerEntity(0, 0, 0, 99, 99, 99,
 			99, null, null, null, null, null, null);
 //	private PlayerEntity ownPlayer2 = new PlayerEntity(3.5, 0, 3.5, 99, 99, 99,
 //			99, null, null, null, null, null, null);

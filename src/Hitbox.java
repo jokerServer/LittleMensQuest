@@ -6,7 +6,8 @@ public abstract class Hitbox {
 	private double y;
 	private double z;
 	private double depth;
-	//TODO move a hitbox
+
+	// TODO move a hitbox
 	public Hitbox(double x, double y, double z, double depth) {
 		setX(x);
 		setY(y);
@@ -15,7 +16,7 @@ public abstract class Hitbox {
 	}
 
 	public abstract int getShape();
-	
+
 	public abstract void show(Graphics g, Component observer);
 
 	public abstract boolean intersects(Hitbox hb);
@@ -32,10 +33,10 @@ public abstract class Hitbox {
 		double rX = rh.getX();
 		double rY = rh.getY();
 
-		if (cX > rX && cX < rX + rWidth) {
+		if (cX > rX - 2 * cRad && cX < rX + rWidth) {
 			if (rY - cY <= cRad) {
 				return true;
-			} else if (cY - rY + rHeight <= cRad) {
+			} else if (cY - (rY + rHeight) <= cRad) {
 				return true;
 			}
 		} else if (cY > rY && cY < rY + rHeight) {

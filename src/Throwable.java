@@ -68,6 +68,6 @@ public class Throwable extends Entity{
 	@Override
 	protected void updateHitboxes() {
 		//TODO move
-		hitbox = new CircleHitbox(getxPosition(), getyPosition(), getzPosition(), 0.175, 0.5);		
+		hitbox = new CircleHitbox(getxPosition() - 0.025, getyPosition() + 0.025, getzPosition(), 0.175, 0.5);		
 	}
 }
