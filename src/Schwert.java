@@ -10,7 +10,5 @@ public class Schwert extends Equipment {
 		setStat_atkSpeed(0.75);
 		
 		setStat_Type(1);
-		
-
 	}
 }
