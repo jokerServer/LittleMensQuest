@@ -5,20 +5,57 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public abstract class Entity {
-	private double xPosition; // in m
-	private double yPosition; // in m
-	private double zPosition; // in m
+	private double x; // in m
+	private double y; // in m
+	private double z; // in m
 	private double xSpeed; // in m/s
 	private double ySpeed; //in m/s
 	private double zSpeed; // in m/s
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
 
-	public Entity(double xPosition, double yPosition, double zPosition) {
+	/**
+	 * Creates a new Entity and adds it to the ArrayList of all Entitys
+	 * @param x Center X Position (Based left)
+	 * @param y Center Y Position (Based on the ground)
+	 * @param z Z Position (Based front)
+	 */
+	public Entity(double x, double y, double z) {
 		entitys.add(this);
-		setxPosition(xPosition);
-		setyPosition(yPosition);
-		setzPosition(zPosition);
+		setX(x);
+		setY(y);
+		setZ(z);
 	}
+	
+	public void update(double timeElapsed) {
+		updateSpeed();
+		updatePosition(timeElapsed);
+		checkForCollisions();
+	}
+		
+	private boolean checkForCollisions(){
+		//TODO just check nearby
+		//TODO reaction
+		for (Entity entity : entitys){
+			if (!entity.equals(this)){
+				if (this.checkForCollision(entity)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	protected void updatePosition(double timeElapsed){
+		setX(getxPosition() + getxSpeed() * timeElapsed / 1000);
+		setY(Math.max(getyPosition() + getySpeed() * timeElapsed / 1000, 0));
+		setZ(getzPosition() + getzSpeed() * timeElapsed / 1000);
+	}
+	
+	protected abstract void updateSpeed();
+
+	public abstract boolean checkForCollision(Entity e);
+	
+	public abstract boolean checkForCollision(Hitbox h);
 	
 	public void drawYourself(Graphics g, Component observer){ //TODO In Render class
 		g.setColor(Color.RED);
@@ -30,27 +67,27 @@ public abstract class Entity {
 	}
 
 	public double getxPosition() {
-		return xPosition;
+		return x;
 	}
 
-	public void setxPosition(double xPosition) {
-		this.xPosition = xPosition;
+	public void setX(double xPosition) {
+		this.x = xPosition;
 	}
 
 	public double getyPosition() {
-		return yPosition;
+		return y;
 	}
 
-	public void setyPosition(double yPosition) {
-		this.yPosition = yPosition;
+	public void setY(double yPosition) {
+		this.y = yPosition;
 	}
 
 	public double getzPosition() {
-		return zPosition;
+		return z;
 	}
 
-	public void setzPosition(double zPosition) {
-		this.zPosition = zPosition;
+	public void setZ(double zPosition) {
+		this.z = zPosition;
 	}
 
 	public double getxSpeed() {
@@ -98,42 +135,4 @@ public abstract class Entity {
 		}
 		this.falling = falling;
 	}
-
-	public void update(double timeElapsed) {
-		updateSpeed();
-		updatePosition(timeElapsed);
-		checkForCollisions();
-	}
-		
-	private boolean checkForCollisions(){
-		//TODO just check nearby
-		//TODO reaction
-		for (Entity entity : entitys){
-			if (!entity.equals(this)){
-				if (this.checkForCollision(entity)){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	protected void updatePosition(double timeElapsed){
-		setxPosition(getxPosition() + getxSpeed() * timeElapsed / 1000);
-		setyPosition(Math.max(getyPosition() + getySpeed() * timeElapsed / 1000, 0));
-		setzPosition(getzPosition() + getzSpeed() * timeElapsed / 1000);
-	}
-	
-	protected abstract void updateSpeed();
-
-	public void toss(double angle, double speed) {
-		setFalling(true);
-		setxSpeed(speed * Math.cos(angle));
-		setySpeed(speed * Math.sin(angle));
-		setzSpeed(speed * Math.tan(angle));
-	}
-
-	public abstract boolean checkForCollision(Entity e);
-	
-	public abstract boolean checkForCollision(Hitbox h);
 }
