@@ -42,10 +42,8 @@ public class PlayerEntity extends Entity {
 			Equipment helmet, Equipment chest, Equipment legs, Equipment boots,
 			Equipment necklace, Equipment ring) {
 		super(xPosition, yPosition, zPosition);
-		head = new RectangleHitbox(getxPosition() - 0.15, getyPosition() + 5,
-				getzPosition(), 0.3, 0.4, 1);
-		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() - 0.6,
-				getzPosition(), 1, 1.6, 1);
+		head = new RectangleHitbox(this, -0.25, 1, 0.5, 0.4, 1);
+		body = new RectangleHitbox(this, -0.5, +0.6, 1, 1.6, 1);
 		try {
 			playerSprite = ImageIO.read(new File("res/Player.png"));
 		} catch (IOException e) {
@@ -101,14 +99,6 @@ public class PlayerEntity extends Entity {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	protected void updateHitboxes() {
-		head = new RectangleHitbox(getxPosition() - 0.3, getyPosition() + 1,
-				getzPosition(), 0.6, 0.4, 1);
-		body = new RectangleHitbox(getxPosition() - 0.5, getyPosition() + 0.6,
-				getzPosition(), 1, 1.6, 1);
 	}
 
 	@Override

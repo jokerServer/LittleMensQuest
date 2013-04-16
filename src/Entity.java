@@ -102,12 +102,9 @@ public abstract class Entity {
 	public void update(double timeElapsed) {
 		updateSpeed();
 		updatePosition(timeElapsed);
-		updateHitboxes();
 		checkForCollisions();
 	}
-	
-	protected abstract void updateHitboxes();
-	
+		
 	private boolean checkForCollisions(){
 		//TODO just check nearby
 		//TODO reaction

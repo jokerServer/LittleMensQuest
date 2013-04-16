@@ -6,9 +6,9 @@ public class RectangleHitbox extends Hitbox {
 	private double width;
 	private double height;
 
-	public RectangleHitbox(double x, double y, double z, double width,
+	public RectangleHitbox(Entity relativeTo, double xDiff, double yDiff, double width,
 			double height, double depth) {
-		super(x, y, z, depth);
+		super(relativeTo, xDiff, yDiff, depth);
 		setWidth(width);
 		setHeight(height);
 	}

@@ -2,17 +2,25 @@ import java.awt.Component;
 import java.awt.Graphics;
 
 public abstract class Hitbox {
-	private double x;
-	private double y;
-	private double z;
+	private Entity relativeTo;
+	private double xDiff;
+	private double yDiff;
 	private double depth;
 
 	// TODO move a hitbox
-	public Hitbox(double x, double y, double z, double depth) {
-		setX(x);
-		setY(y);
-		setZ(z);
+	public Hitbox(Entity relativeTo, double xDiff, double yDiff, double depth) {
+		setRelativeTo(relativeTo);
+		setxDiff(xDiff);
+		setyDiff(yDiff);
 		setDepth(depth);
+	}
+
+	public Entity getRelativeTo() {
+		return relativeTo;
+	}
+
+	public void setRelativeTo(Entity relativeTo) {
+		this.relativeTo = relativeTo;
 	}
 
 	public abstract int getShape();
@@ -103,39 +111,35 @@ public abstract class Hitbox {
 		return Math.abs(tZ - hZ) <= tDepth + hDepth;
 	}
 
-	public double getX() {
-		return x;
+	private static double distance(double x1, double x2, double y1, double y2) {
+		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+	}
+	
+	protected double getX() {
+		return (relativeTo.getxPosition() + xDiff);
 	}
 
-	public void setX(double x) {
-		this.x = x;
+	protected void setxDiff(double yDiff) {
+		this.xDiff = yDiff;
 	}
 
-	public double getY() {
-		return y;
+	protected double getY() {
+		return (relativeTo.getyPosition() + yDiff);
 	}
 
-	public void setY(double y) {
-		this.y = y;
+	private void setyDiff(double yDiff) {
+		this.yDiff = yDiff;
 	}
 
-	public double getZ() {
-		return z;
+	protected double getZ() {
+		return relativeTo.getzPosition();
 	}
 
-	public void setZ(double z) {
-		this.z = z;
-	}
-
-	public double getDepth() {
+	private double getDepth() {
 		return depth;
 	}
 
-	public void setDepth(double depth) {
+	private void setDepth(double depth) {
 		this.depth = depth;
-	}
-
-	private static double distance(double x1, double x2, double y1, double y2) {
-		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
 }

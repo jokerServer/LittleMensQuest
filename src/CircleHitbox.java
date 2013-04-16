@@ -6,9 +6,9 @@ import java.awt.Graphics;
 public class CircleHitbox extends Hitbox {
 	private double radius;
 	
-	public CircleHitbox(double x, double y, double z, double radius, double depth) {
-		super(x, y, z, depth);
-		this.radius = radius;
+	public CircleHitbox(Entity relativeTo, double xDiff, double yDiff, double radius, double depth) {
+		super(relativeTo, xDiff, yDiff, depth);
+		setRadius(radius);
 	}
 
 	@Override
