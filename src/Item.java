@@ -1,4 +1,8 @@
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public abstract class Item {
 	private int itemID;
@@ -22,14 +26,23 @@ public abstract class Item {
 	public Image getItemIcon() {
 		return itemIcon;
 	}
-	protected void setItemIcon(Image itemIcon) {
-		this.itemIcon = itemIcon;
+	protected void setItemIcon(String path) {
+		try {
+			this.itemRenderPicture = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	public Image getItemRenderPicture() {
 		return itemRenderPicture;
 	}
-	protected void setItemRenderPicture(Image itemRenderPicture) {
-		this.itemRenderPicture = itemRenderPicture;
+	protected void setItemRenderPicture(String path) {
+		try {
+			this.itemRenderPicture = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	
