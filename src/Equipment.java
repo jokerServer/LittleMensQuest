@@ -1,11 +1,6 @@
 import java.awt.Image;
 
-public abstract class Equipment {
-	private int itemID;
-	private String itemName;
-	private Image itemIcon; 
-	private Image itemRenderPicture;
-	
+public abstract class Equipment extends Item {
 	private int stat_Dmg;
 	private int stat_MagicDmg;
 	private double stat_atkSpeed;
@@ -142,33 +137,5 @@ public abstract class Equipment {
 	}
 	public int getEmt_agility() {
 		return emt_agility;
-	}
-	
-	// geklauter scheiﬂ von item
-	
-	public int getItemID() {
-		return itemID;
-	}
-	
-	protected void setItemID(int itemID) {
-		this.itemID = itemID;
-	}
-	public String getItemName() {
-		return itemName;
-	}
-	protected void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public Image getItemIcon() {
-		return itemIcon;
-	}
-	protected void setItemIcon(Image itemIcon) {
-		this.itemIcon = itemIcon;
-	}
-	public Image getItemRenderPicture() {
-		return itemRenderPicture;
-	}
-	protected void setItemRenderPicture(Image itemRenderPicture) {
-		this.itemRenderPicture = itemRenderPicture;
 	}
 }

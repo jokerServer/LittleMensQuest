@@ -1,5 +1,3 @@
-// LiEBLOS //
-
 import java.awt.Image;
 
 public abstract class Item {
