@@ -19,12 +19,6 @@ public class WeaponEntity extends Entity {
 	private void createWeaponHitbox() { };
 
 	@Override
-	protected void updateHitboxes() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected void updateSpeed() {
 		// TODO Auto-generated method stub
 		
