@@ -1,25 +1,25 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Image;
 
 public class Throwable extends Entity {
 	private double weight;
 	private Image image;
-	private double throwStartSpeed;
 	private long tossStart;
 	private double tossStrength;
 	private boolean throwing;
 	private CircleHitbox hitbox;
 
-	public CircleHitbox getHitbox() {
-		return hitbox;
-	}
-
-	public void setHitbox(CircleHitbox hitbox) {
-		this.hitbox = hitbox;
-	}
-
+	private double hitbox_xdiff = -0.125;
+	private double hitbox_ydiff = 0.125;
+	private double hitbox_radius = 0.125;
+	private double hitbox_depth = 1;
+	
 	public Throwable(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
-		hitbox = new CircleHitbox(this, -0.025, 0.025, 0.175, 0.5);
+		
+		hitbox = new CircleHitbox(this, -0.125, 0.125, 0.125, 1);
 	}
 
 	@Override
@@ -55,7 +55,79 @@ public class Throwable extends Entity {
 	}
 
 	@Override
+	public void drawYourself(Graphics g, Component observer) {
+		g.setColor(Color.BLACK);
+		int xPosition = (int) (getxPosition() * 100) - image.getWidth(observer) / 2;
+		int yPosition = (int) (getyPosition() * 100)
+				+ (int) (getzPosition() * 40)
+				+ image.getHeight(observer) / 2;
+		yPosition = observer.getSize().height - yPosition;
+		g.drawImage(image, xPosition, yPosition, observer);
+		g.setColor(Color.BLUE);
+		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
+		g.drawString("y: " + getyPosition(), xPosition, yPosition);
+		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
+		hitbox.show(g, observer);
+	}
+	
+	@Override
 	public boolean checkForCollision(Hitbox h) {
 		return hitbox.intersects(h);
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public double getTossStrength() {
+		return tossStrength;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public void setTossStrength(double tossStrength) {
+		this.tossStrength = tossStrength;
+	}
+
+	public double getHitbox_xdiff() {
+		return hitbox_xdiff;
+	}
+
+	public double getHitbox_ydiff() {
+		return hitbox_ydiff;
+	}
+
+	public double getHitbox_radius() {
+		return hitbox_radius;
+	}
+
+	public double getHitbox_depth() {
+		return hitbox_depth;
+	}
+
+	public void setHitbox_xdiff(double hitbox_xdiff) {
+		this.hitbox_xdiff = hitbox_xdiff;
+	}
+
+	public void setHitbox_ydiff(double hitbox_ydiff) {
+		this.hitbox_ydiff = hitbox_ydiff;
+	}
+
+	public void setHitbox_radius(double hitbox_radius) {
+		this.hitbox_radius = hitbox_radius;
+	}
+
+	public void setHitbox_depth(double hitbox_depth) {
+		this.hitbox_depth = hitbox_depth;
 	}
 }

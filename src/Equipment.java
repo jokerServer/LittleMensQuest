@@ -24,11 +24,11 @@ public abstract class Equipment extends Item {
 	private int emt_magic;		// MagicDmg +	// Magical Skill Dmg+
 	private int emt_agility;	// Attackspeed+ // Ranged/Assassins Physical Skills Dmg+
 	
-	private double hitbox_xdiff = 0.15;
-	private double hitbox_ydiff = 0.4;
-	private double hitbox_width = 0.3;
-	private double hitbox_height = 0.8;
-	private double hitbox_depth = 1;
+	private double hitbox_xdiff;
+	private double hitbox_ydiff;
+	private double hitbox_width;
+	private double hitbox_height;
+	private double hitbox_depth;
 	// TODO loadStats(itemID)
 	// TODO customize setter
 	
@@ -88,6 +88,21 @@ public abstract class Equipment extends Item {
 	}
 	protected void setEmt_agility(int emt_agility) {
 		this.emt_agility = emt_agility;
+	}
+	protected void setHitbox_xdiff(double hitbox_xdiff) {
+		this.hitbox_xdiff = hitbox_xdiff;
+	}
+	protected void setHitbox_ydiff(double hitbox_ydiff) {
+		this.hitbox_ydiff = hitbox_ydiff;
+	}
+	protected void setHitbox_width(double hitbox_width) {
+		this.hitbox_width = hitbox_width;
+	}
+	protected void setHitbox_height(double hitbox_height) {
+		this.hitbox_height = hitbox_height;
+	}
+	protected void setHitbox_depth(double hitbox_depth) {
+		this.hitbox_depth = hitbox_depth;
 	}
 	
 	// Getters
