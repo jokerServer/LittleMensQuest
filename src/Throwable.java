@@ -5,7 +5,6 @@ import java.awt.Image;
 
 public class Throwable extends Entity {
 	private double weight;
-	private Image image;
 	private long tossStart;
 	private double tossStrength;
 	private boolean throwing;
@@ -46,28 +45,24 @@ public class Throwable extends Entity {
 		setySpeed(tossStrength);
 	}
 
-	@Override
-	public void drawYourself(Graphics g, Component observer) {
-		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) - image.getWidth(observer) / 2;
-		int yPosition = (int) (getyPosition() * 100)
-				+ (int) (getzPosition() * 40)
-				+ image.getHeight(observer) / 2;
-		yPosition = observer.getSize().height - yPosition;
-		g.drawImage(image, xPosition, yPosition, observer);
-		g.setColor(Color.BLUE);
-		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
-		g.drawString("y: " + getyPosition(), xPosition, yPosition);
-		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
-		showHitboxes(g, observer);
-	}
+//	@Override
+//	public void drawYourself(Graphics g, Component observer) {
+//		g.setColor(Color.BLACK);
+//		int xPosition = (int) (getxPosition() * 100) - image.getWidth(observer) / 2;
+//		int yPosition = (int) (getyPosition() * 100)
+//				+ (int) (getzPosition() * 40)
+//				+ image.getHeight(observer) / 2;
+//		yPosition = observer.getSize().height - yPosition;
+//		g.drawImage(image, xPosition, yPosition, observer);
+//		g.setColor(Color.BLUE);
+//		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
+//		g.drawString("y: " + getyPosition(), xPosition, yPosition);
+//		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
+//		showHitboxes(g, observer);
+//	}
 
 	public double getWeight() {
 		return weight;
-	}
-
-	public Image getImage() {
-		return image;
 	}
 
 	public double getTossStrength() {
@@ -76,10 +71,6 @@ public class Throwable extends Entity {
 
 	public void setWeight(double weight) {
 		this.weight = weight;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
 	}
 
 	public void setTossStrength(double tossStrength) {

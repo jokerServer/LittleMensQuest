@@ -6,7 +6,7 @@ import java.awt.Image;
 public class WeaponEntity extends Entity {
 	private int weaponType;
 	private Image itemIcon;
-	private Image itemRenderPicture;
+//	private Image itemRenderPicture;
 	
 	private double hitbox_xdiff;
 	private double hitbox_ydiff;
@@ -22,7 +22,7 @@ public class WeaponEntity extends Entity {
 		
 		this.weaponType = weapon.getStat_Type();
 		this.itemIcon = weapon.getItemIcon();
-		this.itemRenderPicture = weapon.getItemRenderPicture();
+//		this.itemRenderPicture = weapon.getItemRenderPicture();
 		
 		this.hitbox_xdiff = weapon.getHitbox_xdiff();
 		this.hitbox_ydiff = weapon.getHitbox_ydiff();
@@ -31,23 +31,24 @@ public class WeaponEntity extends Entity {
 		this.hitbox_depth = weapon.getHitbox_depth();
 		
 		addHitbox(new RectangleHitbox(this, this.hitbox_xdiff, this.hitbox_ydiff, this.hitbox_width, this.hitbox_height, this.hitbox_depth));
+		setSprite("res/" +weapon.getItemName() + ".png");
 	}
 	
-	@Override
-	public void drawYourself(Graphics g, Component observer) {
-		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) - itemRenderPicture.getWidth(observer) / 2;
-		int yPosition = (int) (getyPosition() * 100)
-				+ (int) (getzPosition() * 40)
-				+ itemRenderPicture.getHeight(observer) / 2;
-		yPosition = observer.getSize().height - yPosition;
-		g.drawImage(itemRenderPicture, xPosition, yPosition, observer);
-		g.setColor(Color.BLUE);
-		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
-		g.drawString("y: " + getyPosition(), xPosition, yPosition);
-		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
-		showHitboxes(g,observer);
-	}
+//	@Override
+//	public void drawYourself(Graphics g, Component observer) {
+//		g.setColor(Color.BLACK);
+//		int xPosition = (int) (getxPosition() * 100) - itemRenderPicture.getWidth(observer) / 2;
+//		int yPosition = (int) (getyPosition() * 100)
+//				+ (int) (getzPosition() * 40)
+//				+ itemRenderPicture.getHeight(observer) / 2;
+//		yPosition = observer.getSize().height - yPosition;
+//		g.drawImage(itemRenderPicture, xPosition, yPosition, observer);
+//		g.setColor(Color.BLUE);
+//		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
+//		g.drawString("y: " + getyPosition(), xPosition, yPosition);
+//		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
+//		showHitboxes(g,observer);
+//	}
 	
 	@Override
 	protected void updateSpeed() {

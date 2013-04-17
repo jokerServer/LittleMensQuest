@@ -9,7 +9,6 @@ public class Schwert extends Equipment {
 		setItemID(1000);
 		setItemName("Schwert");
 		// setItemIcon("");
-		setItemRenderPicture("res/schwert.png");
 		
 		setStat_Dmg(10);
 		setStat_MagicDmg(0);

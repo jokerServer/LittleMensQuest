@@ -1,7 +1,12 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public abstract class Entity {
 	private double x; // in m
@@ -12,6 +17,8 @@ public abstract class Entity {
 	private double zSpeed; // in m/s
 	private boolean falling;
 	private double fallBegin;
+	private Image sprite;
+	
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
 
@@ -93,8 +100,19 @@ public abstract class Entity {
 	public void drawYourself(Graphics g, Component observer) { // TODO In Render
 																// class //
 																// abstract ?
+		g.setColor(Color.BLACK);
+		int xPosition = (int) (getxPosition() * 100)
+				- getSprite().getWidth(observer) / 2;
+		int yPosition = (int) (getyPosition() * 100)
+				+ (int) (getzPosition() * 40)
+				+ getSprite().getHeight(observer) / 2;
+		yPosition = observer.getSize().height - yPosition;
+		g.drawImage(getSprite(), xPosition, yPosition, observer);
+		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
-		g.fillRect((int) getxPosition(), (int) getyPosition(), 40, 40);
+		g.drawString("x: " + getxPosition(), xPosition, yPosition);
+		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
+		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
 	}
 
 	public static ArrayList<Entity> getEntitys() {
@@ -165,5 +183,24 @@ public abstract class Entity {
 			fallBegin = System.currentTimeMillis();
 		}
 		this.falling = falling;
+	}
+	
+	public Image getSprite() {
+		if (sprite == null)
+			throw new IllegalStateException("No sprite specified");
+		else
+			return sprite;
+	}
+
+	public void setSprite(Image sprite) {
+		this.sprite = sprite;
+	}
+
+	public void setSprite(String path){
+		try{
+			setSprite(ImageIO.read((new File(path))));
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 }

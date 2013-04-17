@@ -1,13 +1,3 @@
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 public class PlayerEntity extends Entity {
 	public enum Direction {
 		FORWARDS, STRAIGHT, BACKWARDS
@@ -27,7 +17,6 @@ public class PlayerEntity extends Entity {
 	private boolean jumping;
 	private double jumpPower = 4;
 	private long jumpStart;
-	public Image playerSprite;
 	private Equipment helmet;
 	private Equipment chest;
 	private Equipment legs;
@@ -42,11 +31,7 @@ public class PlayerEntity extends Entity {
 		super(xPosition, yPosition, zPosition);
 		addHitbox(new RectangleHitbox(this, -0.25, 1, 0.5, 0.4, 1)); // Head
 		addHitbox(new RectangleHitbox(this, -0.5, +0.6, 1, 1.6, 1)); // Body
-		try {
-			playerSprite = ImageIO.read(new File("res/Player.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		setSprite("res/Player.png");
 		setAgility(agility);
 		setStrength(strength);
 		setVitality(vitality);
@@ -115,21 +100,22 @@ public class PlayerEntity extends Entity {
 		}
 	}
 
-	@Override
-	public void drawYourself(Graphics g, Component observer) {
-		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) - playerSprite.getWidth(observer) / 2;
-		int yPosition = (int) (getyPosition() * 100)
-				+ (int) (getzPosition() * 40)
-				+ playerSprite.getHeight(observer) / 2;
-		yPosition = observer.getSize().height - yPosition;
-		g.drawImage(playerSprite, xPosition, yPosition, observer);
-		showHitboxes(g, observer);
-		g.setColor(Color.BLUE);
-		g.drawString("x: " + getxPosition(), xPosition, yPosition);
-		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
-		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
-	}
+//	@Override
+//	public void drawYourself(Graphics g, Component observer) {
+//		g.setColor(Color.BLACK);
+//		int xPosition = (int) (getxPosition() * 100)
+//				- playerSprite.getWidth(observer) / 2;
+//		int yPosition = (int) (getyPosition() * 100)
+//				+ (int) (getzPosition() * 40)
+//				+ playerSprite.getHeight(observer) / 2;
+//		yPosition = observer.getSize().height - yPosition;
+//		g.drawImage(playerSprite, xPosition, yPosition, observer);
+//		showHitboxes(g, observer);
+//		g.setColor(Color.BLUE);
+//		g.drawString("x: " + getxPosition(), xPosition, yPosition);
+//		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
+//		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
+//	}
 
 	public double getRunningSpeed() {
 		return runningSpeed;

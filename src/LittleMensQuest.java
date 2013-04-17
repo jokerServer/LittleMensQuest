@@ -7,8 +7,6 @@ public class LittleMensQuest implements KeyListener {
 	private Renderer renderer = new Renderer(this);
 	private PlayerEntity ownPlayer = new PlayerEntity(0, 0, 0, 99, 99, 99,
 			99, null, null, null, null, null, null);
-//	private PlayerEntity ownPlayer2 = new PlayerEntity(3.5, 0, 3.5, 99, 99, 99,
-//			99, null, null, null, null, null, null);
 	private Ball datBall = new Ball(1.5, 0, 1.5);
 	private Schwert TestSchwert = new Schwert();
 	private WeaponEntity igTestSchwert = new WeaponEntity(2,0,10,TestSchwert);
