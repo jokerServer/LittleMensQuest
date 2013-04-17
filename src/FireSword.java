@@ -7,9 +7,7 @@ public class FireSword extends Equipment {
 	
 	public FireSword() {
 		setItemID(1001);
-		setItemName("Feuer Schwert");
-		// setItemIcon("");
-		setItemRenderPicture("res/firesword.png");
+		setItemName("firesword");
 		
 		setStat_Dmg(10);
 		setStat_MagicDmg(0);
