@@ -8,7 +8,7 @@ public class Schwert extends Equipment {
 	public Schwert() {
 		setItemID(1000);
 		setItemName("Schwert");
-		setItemIcon("");
+		// setItemIcon("");
 		setItemRenderPicture("res/schwert.png");
 		
 		setStat_Dmg(10);
