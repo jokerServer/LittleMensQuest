@@ -28,6 +28,7 @@ public class Ball extends Throwable {
 		setHitbox_ydiff(hitbox_ydiff);
 		setHitbox_radius(hitbox_radius);
 		setHitbox_depth(hitbox_depth);
+		addHitbox(new CircleHitbox(this, -0.125, 0.125, 0.125, 1));
 		// toss(2, 4);
 	}
 	

@@ -9,7 +9,6 @@ public class Throwable extends Entity {
 	private long tossStart;
 	private double tossStrength;
 	private boolean throwing;
-	private CircleHitbox hitbox;
 
 	private double hitbox_xdiff = -0.125;
 	private double hitbox_ydiff = 0.125;
@@ -18,8 +17,6 @@ public class Throwable extends Entity {
 	
 	public Throwable(double xPosition, double yPosition, double zPosition) {
 		super(xPosition, yPosition, zPosition);
-		
-		hitbox = new CircleHitbox(this, -0.125, 0.125, 0.125, 1);
 	}
 
 	@Override
@@ -35,11 +32,6 @@ public class Throwable extends Entity {
 				// TODO Abstand zum Boden beachten
 			}
 		}
-	}
-
-	@Override
-	public boolean checkForCollision(Entity e) {
-		return e.checkForCollision(hitbox);
 	}
 
 	public void toss(int direction, int tossStrength) {
@@ -67,12 +59,7 @@ public class Throwable extends Entity {
 		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
 		g.drawString("y: " + getyPosition(), xPosition, yPosition);
 		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
-		hitbox.show(g, observer);
-	}
-	
-	@Override
-	public boolean checkForCollision(Hitbox h) {
-		return hitbox.intersects(h);
+		showHitboxes(g, observer);
 	}
 
 	public double getWeight() {

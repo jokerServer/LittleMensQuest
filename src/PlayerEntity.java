@@ -40,8 +40,8 @@ public class PlayerEntity extends Entity {
 			Equipment helmet, Equipment chest, Equipment legs, Equipment boots,
 			Equipment necklace, Equipment ring) {
 		super(xPosition, yPosition, zPosition);
-//		addHitbox(new RectangleHitbox(this, -0.25, 1, 0.5, 0.4, 1)); // Head
-//		addHitbox(new RectangleHitbox(this, -0.5, +0.6, 1, 1.6, 1)); // Body
+		addHitbox(new RectangleHitbox(this, -0.25, 1, 0.5, 0.4, 1)); // Head
+		addHitbox(new RectangleHitbox(this, -0.5, +0.6, 1, 1.6, 1)); // Body
 		try {
 			playerSprite = ImageIO.read(new File("res/Player.png"));
 		} catch (IOException e) {

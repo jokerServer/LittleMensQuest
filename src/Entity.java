@@ -77,7 +77,7 @@ public abstract class Entity {
 	}
 
 	public void addHitbox(Hitbox hb) {
-		getHitboxes().add(hb);
+		this.hitboxes.add(hb);
 	}
 	
 	protected ArrayList<Hitbox> getHitboxes(){
