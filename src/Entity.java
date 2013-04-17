@@ -2,22 +2,28 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public abstract class Entity {
 	private double x; // in m
 	private double y; // in m
 	private double z; // in m
 	private double xSpeed; // in m/s
-	private double ySpeed; //in m/s
+	private double ySpeed; // in m/s
 	private double zSpeed; // in m/s
+	private boolean falling;
+	private double fallBegin;
+	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
 
 	/**
 	 * Creates a new Entity and adds it to the ArrayList of all Entitys
-	 * @param x Center X Position (Based left)
-	 * @param y Center Y Position (Based on the ground)
-	 * @param z Z Position (Based front)
+	 * 
+	 * @param x
+	 *            Center X Position (Based left)
+	 * @param y
+	 *            Center Y Position (Based on the ground)
+	 * @param z
+	 *            Z Position (Based front)
 	 */
 	public Entity(double x, double y, double z) {
 		entitys.add(this);
@@ -25,39 +31,68 @@ public abstract class Entity {
 		setY(y);
 		setZ(z);
 	}
-	
+
 	public void update(double timeElapsed) {
 		updateSpeed();
 		updatePosition(timeElapsed);
 		checkForCollisions();
 	}
-		
-	private boolean checkForCollisions(){
-		//TODO just check nearby
-		//TODO reaction
-		for (Entity entity : entitys){
-			if (!entity.equals(this)){
-				if (this.checkForCollision(entity)){
-					return true;
+
+	private ArrayList<Entity> checkForCollisions() {
+		ArrayList<Entity> collisions = new ArrayList<Entity>();
+		for (Entity entity : entitys) {
+			if (!entity.equals(this)) {
+				if (this.checkForCollision(entity)) {
+					collisions.add(entity);
 				}
 			}
+		}
+		return collisions;
+	}
+
+	public boolean checkForCollision(Entity e) {
+		for (Hitbox hitbox: getHitboxes()){
+			if (e.checkForCollision(hitbox)) return true;
 		}
 		return false;
 	}
 
-	protected void updatePosition(double timeElapsed){
+	public boolean checkForCollision(Hitbox h) {
+		for (Hitbox hitbox : getHitboxes()){
+			if (hitbox.intersects(h)) return true;
+		}
+		return false;
+	}
+	
+	protected void showHitboxes(Graphics g, Component observer){
+		for (Hitbox hb : getHitboxes()){
+			hb.show(g,  observer);
+		}
+	}
+
+	protected void updatePosition(double timeElapsed) {
 		setX(getxPosition() + getxSpeed() * timeElapsed / 1000);
 		setY(Math.max(getyPosition() + getySpeed() * timeElapsed / 1000, 0));
 		setZ(getzPosition() + getzSpeed() * timeElapsed / 1000);
 	}
+
+	public void addHitbox(Hitbox hb) {
+		getHitboxes().add(hb);
+	}
 	
+	protected ArrayList<Hitbox> getHitboxes(){
+		if (this.hitboxes.size() == 0){
+			throw new IllegalStateException("Please specify at least one Hitbox for the Entity");
+		} else {
+			return this.hitboxes;
+		}
+	}
+
 	protected abstract void updateSpeed();
 
-	public abstract boolean checkForCollision(Entity e);
-	
-	public abstract boolean checkForCollision(Hitbox h);
-	
-	public void drawYourself(Graphics g, Component observer){ //TODO In Render class // abstract ?
+	public void drawYourself(Graphics g, Component observer) { // TODO In Render
+																// class //
+																// abstract ?
 		g.setColor(Color.BLUE);
 		g.fillRect((int) getxPosition(), (int) getyPosition(), 40, 40);
 	}
@@ -121,10 +156,6 @@ public abstract class Entity {
 	public void setFallBegin(double fallBegin) {
 		this.fallBegin = fallBegin;
 	}
-
-	private boolean falling;
-	private double fallBegin;
-
 	public boolean isFalling() {
 		return falling;
 	}

@@ -13,8 +13,6 @@ public class PlayerEntity extends Entity {
 		FORWARDS, STRAIGHT, BACKWARDS
 	}
 
-	private Hitbox head;
-	private Hitbox body;
 	private int agility;
 	private int strength;
 	private int vitality;
@@ -42,8 +40,8 @@ public class PlayerEntity extends Entity {
 			Equipment helmet, Equipment chest, Equipment legs, Equipment boots,
 			Equipment necklace, Equipment ring) {
 		super(xPosition, yPosition, zPosition);
-		head = new RectangleHitbox(this, -0.25, 1, 0.5, 0.4, 1);
-		body = new RectangleHitbox(this, -0.5, +0.6, 1, 1.6, 1);
+//		addHitbox(new RectangleHitbox(this, -0.25, 1, 0.5, 0.4, 1)); // Head
+//		addHitbox(new RectangleHitbox(this, -0.5, +0.6, 1, 1.6, 1)); // Body
 		try {
 			playerSprite = ImageIO.read(new File("res/Player.png"));
 		} catch (IOException e) {
@@ -82,23 +80,6 @@ public class PlayerEntity extends Entity {
 	public void run() {
 		sprinting = false;
 		running = true;
-	}
-
-	@Override
-	public boolean checkForCollision(Entity e) {
-		if (e.checkForCollision(head) || e.checkForCollision(body)) {
-			System.out.println("Collision");
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean checkForCollision(Hitbox h) {
-		if (head.intersects(h) || body.intersects(h)) {
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -143,8 +124,7 @@ public class PlayerEntity extends Entity {
 				+ playerSprite.getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(playerSprite, xPosition, yPosition, observer);
-		body.show(g, observer);
-		head.show(g, observer);
+		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
 		g.drawString("x: " + getxPosition(), xPosition, yPosition);
 		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
