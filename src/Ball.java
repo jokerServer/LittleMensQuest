@@ -20,12 +20,13 @@ public class Ball extends Throwable {
 		toss(2, 4);
 	}
 	
+	// TODO do dat in throwable class
 	public void drawYourself(Graphics g, Component observer) {
 		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) - 12
-				+ (int) (getzPosition() * 10);
-		int yPosition = (int) (getyPosition() * 100) 
-				+ (int) (getzPosition() * 40) - ballSprite.getHeight(observer)/2;
+		int xPosition = (int) (getxPosition() * 100) - ballSprite.getWidth(observer) / 2;
+		int yPosition = (int) (getyPosition() * 100)
+				+ (int) (getzPosition() * 40)
+				+ ballSprite.getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(ballSprite, xPosition, yPosition, observer);
 		g.setColor(Color.BLUE);

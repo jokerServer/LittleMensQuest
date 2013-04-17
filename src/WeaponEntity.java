@@ -41,10 +41,10 @@ public class WeaponEntity extends Entity {
 	@Override
 	public void drawYourself(Graphics g, Component observer) {
 		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) - 12
-				+ (int) (getzPosition() * 10);
-		int yPosition = (int) (getyPosition() * 100) 
-				+ (int) (getzPosition() * 40) - itemRenderPicture.getHeight(observer)/2;
+		int xPosition = (int) (getxPosition() * 100) - itemRenderPicture.getWidth(observer) / 2;
+		int yPosition = (int) (getyPosition() * 100)
+				+ (int) (getzPosition() * 40)
+				+ itemRenderPicture.getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(itemRenderPicture, xPosition, yPosition, observer);
 		g.setColor(Color.BLUE);

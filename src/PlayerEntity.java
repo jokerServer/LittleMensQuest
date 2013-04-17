@@ -137,7 +137,7 @@ public class PlayerEntity extends Entity {
 	@Override
 	public void drawYourself(Graphics g, Component observer) {
 		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100) - 50;
+		int xPosition = (int) (getxPosition() * 100) - playerSprite.getWidth(observer) / 2;
 		int yPosition = (int) (getyPosition() * 100)
 				+ (int) (getzPosition() * 40)
 				+ playerSprite.getHeight(observer) / 2;
