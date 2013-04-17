@@ -10,7 +10,7 @@ public class LittleMensQuest implements KeyListener {
 //	private PlayerEntity ownPlayer2 = new PlayerEntity(3.5, 0, 3.5, 99, 99, 99,
 //			99, null, null, null, null, null, null);
 	private Ball datBall = new Ball(1.5, 0, 1.5);
-	private Schwert TestSchwert = new Schwert();
+	private FireSword TestSchwert = new FireSword();
 	private WeaponEntity igTestSchwert = new WeaponEntity(2,0,10,TestSchwert);
 	
 	public static void main(String args[]) {
