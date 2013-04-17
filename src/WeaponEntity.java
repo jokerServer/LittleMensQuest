@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Image;
 
 public class WeaponEntity extends Entity {
@@ -35,6 +38,22 @@ public class WeaponEntity extends Entity {
 		this.weaponHitbox = new RectangleHitbox(this, this.hitbox_xdiff, this.hitbox_ydiff, this.hitbox_width, this.hitbox_height, this.hitbox_depth);
 	}
 
+	@Override
+	public void drawYourself(Graphics g, Component observer) {
+		g.setColor(Color.BLACK);
+		int xPosition = (int) (getxPosition() * 100) - 12
+				+ (int) (getzPosition() * 10);
+		int yPosition = (int) (getyPosition() * 100) 
+				+ (int) (getzPosition() * 40) - itemRenderPicture.getHeight(observer)/2;
+		yPosition = observer.getSize().height - yPosition;
+		g.drawImage(itemRenderPicture, xPosition, yPosition, observer);
+		g.setColor(Color.BLUE);
+		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
+		g.drawString("y: " + getyPosition(), xPosition, yPosition);
+		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
+		weaponHitbox.show(g, observer);
+	}
+	
 	@Override
 	protected void updateSpeed() {
 		// TODO Auto-generated method stub

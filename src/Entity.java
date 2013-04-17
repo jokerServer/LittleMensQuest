@@ -57,8 +57,8 @@ public abstract class Entity {
 	
 	public abstract boolean checkForCollision(Hitbox h);
 	
-	public void drawYourself(Graphics g, Component observer){ //TODO In Render class
-		g.setColor(Color.RED);
+	public void drawYourself(Graphics g, Component observer){ //TODO In Render class // abstract ?
+		g.setColor(Color.BLUE);
 		g.fillRect((int) getxPosition(), (int) getyPosition(), 40, 40);
 	}
 
