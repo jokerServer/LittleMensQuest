@@ -23,14 +23,19 @@ public class PlayerEntity extends Entity {
 	private Equipment boots;
 	private Equipment necklace;
 	private Equipment ring;
+	private Equipment weapon;
 
+	private WeaponEntity igTestSchwert;
+	private int weaponHandX;
+	private int weaponHandY;
+	
 	public PlayerEntity(double xPosition, double yPosition, double zPosition,
 			int agility, int strength, int vitality, int intelligence,
 			Equipment helmet, Equipment chest, Equipment legs, Equipment boots,
-			Equipment necklace, Equipment ring) {
+			Equipment necklace, Equipment ring, Equipment weapon) {
 		super(xPosition, yPosition, zPosition);
-		addHitbox(new RectangleHitbox(this, -0.25, 1, 0.5, 0.4, 1)); // Head
-		addHitbox(new RectangleHitbox(this, -0.5, +0.6, 1, 1.6, 1)); // Body
+		addHitbox(new RectangleHitbox(this, -0.25, 0.9, 0.6, 0.5, 1)); // Head
+		addHitbox(new RectangleHitbox(this, -0.4, +0.4, 0.8, 1, 1)); // Body
 		setSprite("res/Player.png");
 		setAgility(agility);
 		setStrength(strength);
@@ -42,6 +47,7 @@ public class PlayerEntity extends Entity {
 		setBoots(boots);
 		setNecklace(necklace);
 		setRing(ring);
+		setWeapon(weapon);
 	}
 
 	public boolean pickUp() {
@@ -70,6 +76,7 @@ public class PlayerEntity extends Entity {
 	@Override
 	protected void updateSpeed() {
 		double speed = 0;
+		this.updateWeapon();
 		if (sprinting) {
 			speed = getSprintingSpeed();
 		} else if (running) {
@@ -279,5 +286,27 @@ public class PlayerEntity extends Entity {
 
 	public void setzDirection(Direction zDirection) {
 		this.zDirection = zDirection;
+	}
+
+	public Equipment getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Equipment weapon) {
+		this.weapon = weapon;
+		this.igTestSchwert = new WeaponEntity(this.getxPosition()-0.3,this.getyPosition()+0.5,this.getzPosition(),this.weapon);
+	}
+	
+	// TODO Griff Koordinate
+	// TODO Umdrehen, Waffe mitdrehen
+	// TODO Update Equipment ?
+	// TODO Skill: Hit/Schlag '^'
+	
+	public void updateWeapon() {
+		if (this.weapon!=null) {
+			this.igTestSchwert.setX(this.getxPosition()-0.3);
+			this.igTestSchwert.setY(this.getyPosition()+0.5);
+			this.igTestSchwert.setZ(getzPosition());
+		}
 	}
 }

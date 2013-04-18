@@ -5,11 +5,14 @@ import java.util.ArrayList;
 public class LittleMensQuest implements KeyListener {
 	public static final int ticksPerSecond = 60;
 	private Renderer renderer = new Renderer(this);
-	private PlayerEntity ownPlayer = new PlayerEntity(0, 0, 0, 99, 99, 99,
-			99, null, null, null, null, null, null);
-	private Ball datBall = new Ball(1.5, 0, 1.5);
 	private FireSword TestSchwert = new FireSword();
-	private WeaponEntity igTestSchwert = new WeaponEntity(2,0,10,TestSchwert);
+//	private Schwert TestSchwert = new Schwert();
+	private PlayerEntity ownPlayer = new PlayerEntity(2, 0, 2, 99, 99, 99,
+			99, null, null, null, null, null, null, TestSchwert);
+	private Ball datBall = new Ball(1.5, 0, 1.5);
+
+//	ownPlayer.setWeapon(TestSchwert);
+//	private WeaponEntity igTestSchwert = new WeaponEntity(2,0,10,TestSchwert);
 	
 	public static void main(String args[]) {
 		new LittleMensQuest();

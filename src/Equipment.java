@@ -10,6 +10,8 @@ public abstract class Equipment extends Item {
 	
 	private int stat_Type; // zB (!!!) 0 = Blau ; 1 = Einhänder ; 2 = Zweihänder ; 3 = Dolch ; 4 = Zauberstab; 
 	
+	private int weaponGraspX;
+	private int weaponGraspY;
 	private int emt_Dmg; 		// emt = EnchantMenT //
 	private int emt_MagicDmg;
 	private int emt_atkSpeedBonus;
@@ -104,7 +106,12 @@ public abstract class Equipment extends Item {
 	protected void setHitbox_depth(double hitbox_depth) {
 		this.hitbox_depth = hitbox_depth;
 	}
-	
+	protected void setWeaponGraspX(int weaponGraspX) {
+		this.weaponGraspX = weaponGraspX;
+	}
+	protected void setWeaponGraspY(int weaponGraspY) {
+		this.weaponGraspY = weaponGraspY;
+	}
 	// Getters
 	
 	public int getStat_Dmg() {
@@ -176,5 +183,12 @@ public abstract class Equipment extends Item {
 	
 	public double getHitbox_depth() {
 		return hitbox_depth;
+	}
+	
+	public int getWeaponGraspX() {
+		return weaponGraspX;
+	}
+	public int getWeaponGraspY() {
+		return weaponGraspY;
 	}
 }
