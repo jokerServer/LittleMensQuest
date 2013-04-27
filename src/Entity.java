@@ -111,6 +111,7 @@ public abstract class Entity {
 				+ (int) (getzPosition() * 40)
 				+ getSprite().getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
+
 		
 		double rotation = Math.toRadians(this.getRotation());
 		double locationX = lSprite.getWidth(observer) / 2;
