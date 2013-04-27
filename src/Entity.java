@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -100,6 +101,7 @@ public abstract class Entity {
 	public void drawYourself(Graphics g, Component observer) { // TODO In Render
 																// class //
 																// abstract ?
+		g = (Graphics2D) g;
 		g.setColor(Color.BLACK);
 		int xPosition = (int) (getxPosition() * 100)
 				- getSprite().getWidth(observer) / 2;
@@ -108,6 +110,7 @@ public abstract class Entity {
 				+ getSprite().getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
 		g.drawImage(getSprite(), xPosition, yPosition, observer);
+	
 		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
 		g.drawString("x: " + getxPosition(), xPosition, yPosition);
