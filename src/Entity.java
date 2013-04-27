@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -97,9 +98,13 @@ public abstract class Entity {
 
 	protected abstract void updateSpeed();
 
-	public void drawYourself(Graphics g, Component observer) { // TODO In Render
-																// class //
-																// abstract ?
+	public void rotate(Image pSprite, Component observer, int x, int y, int radiant) {
+		pSprite.getGraphics().translate(pSprite.getHeight(observer)/2, pSprite.getWidth(observer)/2);
+		((Graphics2D) pSprite.getGraphics()).rotate(radiant);
+	}
+	
+	public void drawYourself(Graphics g, Component observer) { // TODO In Render // class // abstract ?
+		Image lSprite = getSprite();
 		g.setColor(Color.BLACK);
 		int xPosition = (int) (getxPosition() * 100)
 				- getSprite().getWidth(observer) / 2;
@@ -107,7 +112,9 @@ public abstract class Entity {
 				+ (int) (getzPosition() * 40)
 				+ getSprite().getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
-		g.drawImage(getSprite(), xPosition, yPosition, observer);
+		this.rotate(lSprite, observer, 0, 0, 2);
+		//lSprite.getGraphics().drawImage(lSprite, xPosition, yPosition, observer);
+		g.drawImage(lSprite, xPosition, yPosition, observer);
 		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
 		g.drawString("x: " + getxPosition(), xPosition, yPosition);
