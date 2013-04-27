@@ -97,10 +97,16 @@ public abstract class Entity {
 	}
 
 	protected abstract void updateSpeed();
-
+ 		
+ 	public void rotate(Image pSprite, Component observer, int x, int y, int radiant) {
+		pSprite.getGraphics().translate(pSprite.getHeight(observer)/2, pSprite.getWidth(observer)/2);
+		((Graphics2D) pSprite.getGraphics()).rotate(radiant);
+	}
+	
 	public void drawYourself(Graphics g, Component observer) { // TODO In Render
 																// class //
 																// abstract ?
+		Image lSprite = getSprite();
 		g = (Graphics2D) g;
 		g.setColor(Color.BLACK);
 		int xPosition = (int) (getxPosition() * 100)
@@ -109,7 +115,9 @@ public abstract class Entity {
 				+ (int) (getzPosition() * 40)
 				+ getSprite().getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
-		g.drawImage(getSprite(), xPosition, yPosition, observer);
+				this.rotate(lSprite, observer, 0, 0, 2);
+		//lSprite.getGraphics().drawImage(lSprite, xPosition, yPosition, observer);
+		g.drawImage(lSprite, xPosition, yPosition, observer);
 	
 		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
