@@ -9,6 +9,8 @@ public class LittleMensQuest implements KeyListener {
 //	private Schwert TestSchwert = new Schwert();
 	private PlayerEntity ownPlayer = new PlayerEntity(2, 0, 2, 99, 99, 99,
 			99, null, null, null, null, null, null, TestSchwert);
+	private PlayerEntity enemyPlayer = new PlayerEntity(2, 0, 2, 99, 99, 99,
+			99, null, null, null, null, null, null, TestSchwert);
 	private Ball datBall = new Ball(1.5, 0, 1.5);
 
 //	ownPlayer.setWeapon(TestSchwert);
@@ -63,6 +65,9 @@ public class LittleMensQuest implements KeyListener {
 			break;
 		case KeyEvent.VK_SPACE:
 			ownPlayer.jump();
+			break;
+		case KeyEvent.VK_ENTER:
+			ownPlayer.castAbility(0, enemyPlayer);
 			break;
 		}
 

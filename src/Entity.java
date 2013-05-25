@@ -26,6 +26,8 @@ public abstract class Entity {
 	private int rotationY = 0;
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
+	private double health;
+	private final double maxHealth;
 
 	/**
 	 * Creates a new Entity and adds it to the ArrayList of all Entitys
@@ -39,6 +41,8 @@ public abstract class Entity {
 	 */
 	public Entity(double x, double y, double z) {
 		entitys.add(this);
+		this.maxHealth = 100; //TODO parameter
+		this.health = maxHealth;
 		setX(x);
 		setY(y);
 		setZ(z);
@@ -112,9 +116,21 @@ public abstract class Entity {
 		//g.drawImage(lSprite, xPosition, yPosition, observer);
 		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
+		//DEBUG
 		g.drawString("x: " + getxPosition(), spritePositionX, spritePositionY);
 		g.drawString("y: " + getyPosition(), spritePositionX, spritePositionY + 15);
 		g.drawString("z: " + getzPosition(), spritePositionX, spritePositionY + 30);
+		g.drawString("hp: " + this.health, spritePositionX, spritePositionY + 45);
+	}
+	
+	public boolean getDamaged(double value){
+		this.health = Math.max(this.health - value, 0);
+		return true;
+	}
+	
+	public boolean getHealed(double value){
+		this.health = Math.min(this.health + value, this.maxHealth);
+		return true;
 	}
 
 	

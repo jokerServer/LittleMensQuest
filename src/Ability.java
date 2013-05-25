@@ -1,12 +1,12 @@
 public abstract class Ability {
 	private int id;
 	private String name;
-	private Entity source;
+	private Equipment source;
 	
-	protected Ability(int id, String name, Entity source) {
+	protected Ability(int id, String name, Equipment weapon) {
 		setId(id);
 		setName(name);
-		setSource(source);
+		setSource(weapon);
 	}
 	
 	public abstract boolean cast(Entity target);
@@ -27,12 +27,12 @@ public abstract class Ability {
 		this.name = name;
 	}
 
-	public Entity getSource() {
+	public Equipment getSource() {
 		return source;
 	}
 
-	public void setSource(Entity source) {
-		this.source = source;
+	public void setSource(Equipment weapon) {
+		this.source = weapon;
 	}
 
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class PlayerEntity extends Entity {
 	public enum Direction {
 		FORWARDS, STRAIGHT, BACKWARDS
@@ -36,11 +38,14 @@ public class PlayerEntity extends Entity {
 	private double weaponHandLY = 0;
 	private double weaponPosY; // #YOLO
 	
+	private ArrayList<Ability> isAbleToDo = new ArrayList<Ability>();
+	
 	public PlayerEntity(double xPosition, double yPosition, double zPosition,
 			int agility, int strength, int vitality, int intelligence,
 			Equipment helmet, Equipment chest, Equipment legs, Equipment boots,
 			Equipment necklace, Equipment ring, Equipment weapon) {
 		super(xPosition, yPosition, zPosition);
+		isAbleToDo.add(new SwordHitAbility(weapon));
 		addHitbox(new RectangleHitbox(this, -0.25, 0.9, 0.6, 0.5, 1)); // Head
 		addHitbox(new RectangleHitbox(this, -0.4, +0.4, 0.8, 1, 1)); // Body
 		setSprite("res/Player.png");
@@ -55,6 +60,10 @@ public class PlayerEntity extends Entity {
 		setNecklace(necklace);
 		setRing(ring);
 		setWeapon(weapon);
+	}
+	
+	public void castAbility(int id, Entity target){
+		isAbleToDo.get(id).cast(target);
 	}
 
 	public boolean pickUp() {
