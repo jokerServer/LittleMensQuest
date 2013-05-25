@@ -123,8 +123,15 @@ public abstract class Entity {
 		g.drawString("hp: " + this.health, spritePositionX, spritePositionY + 45);
 	}
 	
+	public void destroy(){
+		entitys.remove(this);
+	}
+	
 	public boolean getDamaged(double value){
-		this.health = Math.max(this.health - value, 0);
+		this.health = this.health - value;
+		if (health <= 0){
+			destroy();
+		}
 		return true;
 	}
 	
