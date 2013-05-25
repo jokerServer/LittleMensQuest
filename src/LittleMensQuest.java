@@ -16,6 +16,7 @@ public class LittleMensQuest implements KeyListener {
 	
 	public static void main(String args[]) {
 		new LittleMensQuest();
+		//this.TestSchwert.setRotation()
 	}
 
 	public LittleMensQuest() {

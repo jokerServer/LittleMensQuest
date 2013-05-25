@@ -14,6 +14,9 @@ public class WeaponEntity extends Entity {
 	private double hitbox_height;
 	private double hitbox_depth;
 	
+	private double graspX;
+	private double graspY;
+	
 	private int weaponDepth = 1;
 	private boolean gotOwner = false;
 	
@@ -30,25 +33,12 @@ public class WeaponEntity extends Entity {
 		this.hitbox_height = weapon.getHitbox_height();
 		this.hitbox_depth = weapon.getHitbox_depth();
 		
+		this.graspX = weapon.getWearPosX();
+		this.graspY = weapon.getWearPosY();
+		
 		addHitbox(new RectangleHitbox(this, this.hitbox_xdiff, this.hitbox_ydiff, this.hitbox_width, this.hitbox_height, this.hitbox_depth));
 		setSprite("res/" +weapon.getItemName() + ".png");
 	}
-	
-//	@Override
-//	public void drawYourself(Graphics g, Component observer) {
-//		g.setColor(Color.BLACK);
-//		int xPosition = (int) (getxPosition() * 100) - itemRenderPicture.getWidth(observer) / 2;
-//		int yPosition = (int) (getyPosition() * 100)
-//				+ (int) (getzPosition() * 40)
-//				+ itemRenderPicture.getHeight(observer) / 2;
-//		yPosition = observer.getSize().height - yPosition;
-//		g.drawImage(itemRenderPicture, xPosition, yPosition, observer);
-//		g.setColor(Color.BLUE);
-//		g.drawString("x: " + getxPosition(), xPosition, yPosition - 15);
-//		g.drawString("y: " + getyPosition(), xPosition, yPosition);
-//		g.drawString("z: " + getzPosition(), xPosition, yPosition + 15);
-//		showHitboxes(g,observer);
-//	}
 	
 	@Override
 	protected void updateSpeed() {

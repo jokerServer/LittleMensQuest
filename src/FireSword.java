@@ -14,7 +14,8 @@ public class FireSword extends Equipment {
 		setStat_atkSpeed(0.75);
 		
 		setStat_Type(1);
-		
+		setWearPosX(0); //20 //Abweichung vom Mittelpunkt // #YOLO 
+		setWearPosY(-0.4); //90
 		setHitbox_xdiff(hitbox_xdiff);
 		setHitbox_ydiff(hitbox_ydiff);
 		setHitbox_width(hitbox_width);
