@@ -3,6 +3,9 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ public abstract class Entity {
 	private boolean falling;
 	private double fallBegin;
 	private Image sprite;
+	private int rotation = 0;
 	
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
@@ -97,17 +101,9 @@ public abstract class Entity {
 	}
 
 	protected abstract void updateSpeed();
- 		
- 	public void rotate(Image pSprite, Component observer, int x, int y, int radiant) {
-		pSprite.getGraphics().translate(pSprite.getHeight(observer)/2, pSprite.getWidth(observer)/2);
-		((Graphics2D) pSprite.getGraphics()).rotate(radiant);
-	}
 	
-	public void drawYourself(Graphics g, Component observer) { // TODO In Render
-																// class //
-																// abstract ?
+	public void drawYourself(Graphics g, Component observer) { // TODO In Render // class // abstract ?
 		Image lSprite = getSprite();
-		g = (Graphics2D) g;
 		g.setColor(Color.BLACK);
 		int xPosition = (int) (getxPosition() * 100)
 				- getSprite().getWidth(observer) / 2;
@@ -115,9 +111,17 @@ public abstract class Entity {
 				+ (int) (getzPosition() * 40)
 				+ getSprite().getHeight(observer) / 2;
 		yPosition = observer.getSize().height - yPosition;
-				this.rotate(lSprite, observer, 0, 0, 2);
-		//lSprite.getGraphics().drawImage(lSprite, xPosition, yPosition, observer);
-		g.drawImage(lSprite, xPosition, yPosition, observer);
+
+		
+		double rotation = Math.toRadians(this.getRotation());
+		double locationX = lSprite.getWidth(observer) / 2;
+		double locationY = lSprite.getHeight(observer) / 2;
+		AffineTransform tx = AffineTransform.getRotateInstance(rotation, locationX, locationY);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		
+		g.drawImage(op.filter((BufferedImage) lSprite, null), xPosition, yPosition, observer);
+		
+		//g.drawImage(lSprite, xPosition, yPosition, observer);
 		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
 		g.drawString("x: " + getxPosition(), xPosition, yPosition);
@@ -206,6 +210,14 @@ public abstract class Entity {
 		this.sprite = sprite;
 	}
 
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
+	
+	public int getRotation() {
+		return this.rotation;
+	}
+	
 	public void setSprite(String path){
 		try{
 			setSprite(ImageIO.read((new File(path))));
