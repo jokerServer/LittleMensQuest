@@ -23,7 +23,27 @@ public abstract class Entity {
 	private double fallBegin;
 	private Image sprite;
 	private int rotation = 0;
+	private int rotationX = 0;
+	private int rotationY = 0;
 	
+	public int getRotationX() {
+		return rotationX;
+	}
+
+	public int getRotationY() {
+		return rotationY;
+	}
+	
+	public int getRotation() {
+		return this.rotation;
+	}
+	
+	public void setRotation(int rotation, int rotationY, int rotationX) {
+		this.rotation = rotation;
+		this.rotationY = rotationY;
+		this.rotationX = rotationX;
+	}
+
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
 
@@ -114,9 +134,9 @@ public abstract class Entity {
 
 		
 		double rotation = Math.toRadians(this.getRotation());
-		double locationX = lSprite.getWidth(observer) / 2;
-		double locationY = lSprite.getHeight(observer) / 2;
-		AffineTransform tx = AffineTransform.getRotateInstance(rotation, locationX, locationY);
+		//double locationX = lSprite.getWidth(observer) / 2;
+		//double locationY = lSprite.getHeight(observer) / 2;
+		AffineTransform tx = AffineTransform.getRotateInstance(rotation, this.getRotationX(), this.getRotationY());
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 		
 		g.drawImage(op.filter((BufferedImage) lSprite, null), xPosition, yPosition, observer);
@@ -208,14 +228,6 @@ public abstract class Entity {
 
 	public void setSprite(Image sprite) {
 		this.sprite = sprite;
-	}
-
-	public void setRotation(int rotation) {
-		this.rotation = rotation;
-	}
-	
-	public int getRotation() {
-		return this.rotation;
 	}
 	
 	public void setSprite(String path){

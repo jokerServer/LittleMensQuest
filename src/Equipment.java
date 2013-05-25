@@ -8,6 +8,8 @@ public abstract class Equipment extends Item {
 	private int stat_Armor;
 	private int stat_MagicResistance;
 	
+	private double wearPosX;
+	private double wearPosY;
 	private int stat_Type; // zB (!!!) 0 = Blau ; 1 = Einhänder ; 2 = Zweihänder ; 3 = Dolch ; 4 = Zauberstab; 
 	
 	private int weaponGraspX;
@@ -184,11 +186,17 @@ public abstract class Equipment extends Item {
 	public double getHitbox_depth() {
 		return hitbox_depth;
 	}
+	public double getWearPosX() {
+		return wearPosX;
+	}
+	public void setWearPosX(double d) {
+		this.wearPosX = d;
+	}
+	public double getWearPosY() {
+		return wearPosY;
+	}
+	public void setWearPosY(double d) {
+		this.wearPosY = d;
+	}
 	
-	public int getWeaponGraspX() {
-		return weaponGraspX;
-	}
-	public int getWeaponGraspY() {
-		return weaponGraspY;
-	}
 }

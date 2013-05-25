@@ -26,8 +26,15 @@ public class PlayerEntity extends Entity {
 	private Equipment weapon;
 
 	private WeaponEntity igTestSchwert;
-	private int weaponHandX;
-	private int weaponHandY;
+//	private double weaponHandRX = 0.31;
+//	private double weaponHandRY = 0.9;
+//	private double weaponHandLX = -0.25;
+//	private double weaponHandLY = 0.8;
+	private double weaponHandRX = 0.31;
+	private double weaponHandRY = 0;
+	private double weaponHandLX = -0.25;
+	private double weaponHandLY = 0;
+	private double weaponPosY; // #YOLO
 	
 	public PlayerEntity(double xPosition, double yPosition, double zPosition,
 			int agility, int strength, int vitality, int intelligence,
@@ -106,23 +113,6 @@ public class PlayerEntity extends Entity {
 			}
 		}
 	}
-
-//	@Override
-//	public void drawYourself(Graphics g, Component observer) {
-//		g.setColor(Color.BLACK);
-//		int xPosition = (int) (getxPosition() * 100)
-//				- playerSprite.getWidth(observer) / 2;
-//		int yPosition = (int) (getyPosition() * 100)
-//				+ (int) (getzPosition() * 40)
-//				+ playerSprite.getHeight(observer) / 2;
-//		yPosition = observer.getSize().height - yPosition;
-//		g.drawImage(playerSprite, xPosition, yPosition, observer);
-//		showHitboxes(g, observer);
-//		g.setColor(Color.BLUE);
-//		g.drawString("x: " + getxPosition(), xPosition, yPosition);
-//		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
-//		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
-//	}
 
 	public double getRunningSpeed() {
 		return runningSpeed;
@@ -304,8 +294,16 @@ public class PlayerEntity extends Entity {
 	
 	public void updateWeapon() {
 		if (this.weapon!=null) {
-			this.igTestSchwert.setX(this.getxPosition()-0.3);
-			this.igTestSchwert.setY(this.getyPosition()+0.5);
+			//TODO bring den schwertgriff koords shit rein!!!
+			if (this.xDirection==Direction.FORWARDS) {
+				this.igTestSchwert.setX(this.getxPosition()+this.weaponHandRX);
+				weaponPosY = this.weaponHandRY;
+			} else if (this.xDirection==Direction.BACKWARDS) {
+				this.igTestSchwert.setX(this.getxPosition()+this.weaponHandLX);
+				weaponPosY = this.weaponHandLY;
+			}
+			
+			this.igTestSchwert.setY(this.getyPosition()); //+weaponPosY+weapon.getWearPosY()
 			this.igTestSchwert.setZ(getzPosition());
 		}
 	}
