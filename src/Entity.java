@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -25,25 +24,6 @@ public abstract class Entity {
 	private int rotation = 0;
 	private int rotationX = 0;
 	private int rotationY = 0;
-	
-	public int getRotationX() {
-		return rotationX;
-	}
-
-	public int getRotationY() {
-		return rotationY;
-	}
-	
-	public int getRotation() {
-		return this.rotation;
-	}
-	
-	public void setRotation(int rotation, int rotationY, int rotationX) {
-		this.rotation = rotation;
-		this.rotationY = rotationY;
-		this.rotationX = rotationX;
-	}
-
 	private ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
 
@@ -63,13 +43,21 @@ public abstract class Entity {
 		setY(y);
 		setZ(z);
 	}
-
-	public void update(double timeElapsed) {
-		updateSpeed();
-		updatePosition(timeElapsed);
-		checkForCollisions();
+		
+	public boolean checkForCollision(Entity e) {
+		for (Hitbox hitbox: getHitboxes()){
+			if (e.checkForCollision(hitbox)) return true;
+		}
+		return false;
 	}
-
+	
+	public boolean checkForCollision(Hitbox h) {
+		for (Hitbox hitbox : getHitboxes()){
+			if (hitbox.intersects(h)) return true;
+		}
+		return false;
+	}
+	
 	private ArrayList<Entity> checkForCollisions() {
 		ArrayList<Entity> collisions = new ArrayList<Entity>();
 		for (Entity entity : entitys) {
@@ -82,34 +70,60 @@ public abstract class Entity {
 		return collisions;
 	}
 
-	public boolean checkForCollision(Entity e) {
-		for (Hitbox hitbox: getHitboxes()){
-			if (e.checkForCollision(hitbox)) return true;
-		}
-		return false;
-	}
-
-	public boolean checkForCollision(Hitbox h) {
-		for (Hitbox hitbox : getHitboxes()){
-			if (hitbox.intersects(h)) return true;
-		}
-		return false;
+	public void update(double timeElapsed) {
+		updateSpeed();
+		updatePosition(timeElapsed);
+		checkForCollisions();
 	}
 	
-	protected void showHitboxes(Graphics g, Component observer){
-		for (Hitbox hb : getHitboxes()){
-			hb.show(g,  observer);
-		}
-	}
-
 	protected void updatePosition(double timeElapsed) {
 		setX(getxPosition() + getxSpeed() * timeElapsed / 1000);
 		setY(Math.max(getyPosition() + getySpeed() * timeElapsed / 1000, 0));
 		setZ(getzPosition() + getzSpeed() * timeElapsed / 1000);
 	}
+	
+	protected abstract void updateSpeed();
+	
+	protected void showHitboxes(Graphics g, Component observer){ //DEBUG
+		for (Hitbox hb : getHitboxes()){
+			hb.show(g,  observer);
+		}
+	}
 
-	public void addHitbox(Hitbox hb) {
-		this.hitboxes.add(hb);
+	public void drawYourself(Graphics g, Component observer) { // TODO In Render // class // abstract ?
+		Image lSprite = getSprite();
+		g.setColor(Color.BLACK);
+		double pixelsPerMeter = 100; //TODO von Auflösung abhängig
+		int spritePositionX = (int) (getxPosition() * pixelsPerMeter)
+				- getSprite().getWidth(observer) / 2;
+		int spritePositionY = (int) (getyPosition() * pixelsPerMeter)
+				+ (int) (getzPosition() * pixelsPerMeter/2)
+				+ getSprite().getHeight(observer) / 2;
+		spritePositionY = observer.getSize().height - spritePositionY;
+
+		double rotation = Math.toRadians(this.getRotation());
+		//double locationX = lSprite.getWidth(observer) / 2;
+		//double locationY = lSprite.getHeight(observer) / 2;
+		AffineTransform tx = AffineTransform.getRotateInstance(rotation, this.getRotationX(), this.getRotationY());
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		
+		g.drawImage(op.filter((BufferedImage) lSprite, null), spritePositionX, spritePositionY, observer);
+		
+		//g.drawImage(lSprite, xPosition, yPosition, observer);
+		showHitboxes(g, observer);
+		g.setColor(Color.BLUE);
+		g.drawString("x: " + getxPosition(), spritePositionX, spritePositionY);
+		g.drawString("y: " + getyPosition(), spritePositionX, spritePositionY + 15);
+		g.drawString("z: " + getzPosition(), spritePositionX, spritePositionY + 30);
+	}
+
+	
+	
+	
+	public static ArrayList<Entity> getEntitys() {
+		@SuppressWarnings("unchecked")
+		ArrayList<Entity> clone = (ArrayList<Entity>) entitys.clone();
+		return clone;
 	}
 	
 	protected ArrayList<Hitbox> getHitboxes(){
@@ -118,39 +132,6 @@ public abstract class Entity {
 		} else {
 			return this.hitboxes;
 		}
-	}
-
-	protected abstract void updateSpeed();
-	
-	public void drawYourself(Graphics g, Component observer) { // TODO In Render // class // abstract ?
-		Image lSprite = getSprite();
-		g.setColor(Color.BLACK);
-		int xPosition = (int) (getxPosition() * 100)
-				- getSprite().getWidth(observer) / 2;
-		int yPosition = (int) (getyPosition() * 100)
-				+ (int) (getzPosition() * 40)
-				+ getSprite().getHeight(observer) / 2;
-		yPosition = observer.getSize().height - yPosition;
-
-		
-		double rotation = Math.toRadians(this.getRotation());
-		//double locationX = lSprite.getWidth(observer) / 2;
-		//double locationY = lSprite.getHeight(observer) / 2;
-		AffineTransform tx = AffineTransform.getRotateInstance(rotation, this.getRotationX(), this.getRotationY());
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-		
-		g.drawImage(op.filter((BufferedImage) lSprite, null), xPosition, yPosition, observer);
-		
-		//g.drawImage(lSprite, xPosition, yPosition, observer);
-		showHitboxes(g, observer);
-		g.setColor(Color.BLUE);
-		g.drawString("x: " + getxPosition(), xPosition, yPosition);
-		g.drawString("y: " + getyPosition(), xPosition, yPosition + 15);
-		g.drawString("z: " + getzPosition(), xPosition, yPosition + 30);
-	}
-
-	public static ArrayList<Entity> getEntitys() {
-		return entitys;
 	}
 
 	public double getxPosition() {
@@ -164,6 +145,18 @@ public abstract class Entity {
 	public double getyPosition() {
 		return y;
 	}
+	
+	public int getRotationX() {
+		return rotationX;
+	}
+
+	public int getRotationY() {
+		return rotationY;
+	}
+	
+	public int getRotation() {
+		return this.rotation;
+	}
 
 	public void setY(double yPosition) {
 		this.y = yPosition;
@@ -175,6 +168,12 @@ public abstract class Entity {
 
 	public void setZ(double zPosition) {
 		this.z = zPosition;
+	}
+	
+	public void setRotation(int rotation, int rotationY, int rotationX) {
+		this.rotation = rotation;
+		this.rotationY = rotationY;
+		this.rotationX = rotationX;
 	}
 
 	public double getxSpeed() {
@@ -208,6 +207,7 @@ public abstract class Entity {
 	public void setFallBegin(double fallBegin) {
 		this.fallBegin = fallBegin;
 	}
+	
 	public boolean isFalling() {
 		return falling;
 	}
@@ -236,5 +236,9 @@ public abstract class Entity {
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+	}
+	
+	public void addHitbox(Hitbox hb) {
+		this.hitboxes.add(hb);
 	}
 }
