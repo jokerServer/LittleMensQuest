@@ -118,7 +118,6 @@ public abstract class Entity {
 				this.rotate(lSprite, observer, 0, 0, 2);
 		//lSprite.getGraphics().drawImage(lSprite, xPosition, yPosition, observer);
 		g.drawImage(lSprite, xPosition, yPosition, observer);
-	
 		showHitboxes(g, observer);
 		g.setColor(Color.BLUE);
 		g.drawString("x: " + getxPosition(), xPosition, yPosition);
